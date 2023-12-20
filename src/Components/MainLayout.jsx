@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
-import style from "./mainlayout.module.scss";
+// import style from "./mainLayout.module.scss";
 import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
 import { IoIosArrowDropdown } from "react-icons/io";
+import style from './mainLayout.module.scss'
 
 function generateRandomData() {
   return {
