@@ -21,7 +21,7 @@ function generateRandomData() {
     },
     value4:{
       value: Math.floor(Math.random() * 100),
-      unit: "Hz",
+      unit: "Hz", //hertzz
     }
     
   };
