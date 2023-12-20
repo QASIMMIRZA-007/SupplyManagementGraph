@@ -1,0 +1,50 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+body,html{
+  height: 100%;
+  width: 100%;
+  background: #000;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+
+}
+.flex{
+  display: flex;
+}
+.al{
+  align-items: center;
+}
+.g-1{
+  gap: 10px;
+ 
+}
+.jc{
+  justify-content: center;
+}
+ul{
+  display: none;
+}
+.recharts-wrapper{
+  max-width: 400px !important;
+ max-height: 300px !important;
+}
+.miniBox{
+  background: #fff;
+  color: #000;
+ border-radius: 5px;
+  // width: 40px;
+  padding:  5px 10px;
+  font-size: 19px;
+}
+@media screen and (max-width:768px) {
+  .miniBox{
+    padding: 2px 4px;
+  }
+}
+.smBox{
+  height: 15vh !important;
+  background: red;
+}

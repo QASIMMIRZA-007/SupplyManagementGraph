@@ -1,0 +1,242 @@
+
+
+.mainLayout {
+  width: 100%;
+  height: 100vh;
+
+  .layout {
+    width: 100%;
+    height: 100vh;
+    background: #202221;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    /* General Styles */
+
+    .left {
+      width: 65%;
+      height: 95vh;
+      background: #000;
+      border-radius: 10px;
+
+      /* General Styles for .left */
+
+      .subLeft {
+        margin-top: 30px;
+
+        .box {
+          width: 45%;
+          height: 12vh;
+          background: #202221;
+          border-radius: 10px;
+          margin: 10px 10px 10px 10px;
+          padding: 10px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          /* General Styles for .box */
+        }
+
+        .bigBox {
+          width: calc(90% + 20px);
+          height: 30vh;
+          background: #202221;
+          border-radius: 10px;
+          position: relative;
+          top: 7px;
+          padding: 10px;
+          margin-inline: auto;
+          display: flex;
+          align-items: center;
+
+          /* General Styles for .bigBox */
+
+          .innerBigBox {
+            display: flex;
+            gap: 10px;
+
+            /* General Styles for .innerBigBox */
+
+            .rectBox {
+              padding: 5px 15px;
+              border-radius: 5px;
+              // height: 40px;
+              background: #fff;
+              color: #000;
+
+              /* General Styles for .rectBox */
+            }
+          }
+        }
+
+        .rectangle {
+          width: 45%;
+          height: 8vh;
+          background: #202221;
+          border-radius: 10px;
+          margin: 25px 10px;
+          margin-bottom: 0;
+          padding: 10px;
+
+          /* General Styles for .rectangle */
+
+          .innerRect {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: relative;
+
+            /* General Styles for .innerRect */
+
+            span {
+              margin-top: 2px;
+              font-size: 20px;
+              cursor: pointer;
+            }
+
+            ul {
+              position: absolute;
+              top: 100%;
+
+              /* General Styles for ul */
+
+              li {
+                list-style: none;
+                background: #fff;
+                color: #000;
+                width: 350px;
+                height: 4vh;
+                border-radius: 7px;
+                margin: 5px;
+                padding: 0 10px;
+                cursor: grab;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .right {
+      width: 25%;
+      height: 95vh;
+      background: #000;
+      border-radius: 10px;
+
+      /* General Styles for .right */
+
+      .innerRight {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        flex-direction: column;
+        margin-top: 50px;
+
+        /* General Styles for .innerRight */
+
+        .box {
+          width: 90%;
+          height: 26vh;
+          background: #202221;
+          border-radius: 10px;
+          margin-inline: auto;
+          padding:10px 20px;
+
+          /* General Styles for .box */
+
+          .form {
+            display: flex;
+            align-items: center;
+
+            /* General Styles for .form */
+
+            label {
+              margin-bottom: 5px;
+
+              /* General Styles for label */
+
+              .innerBigBox {
+                display: flex;
+                gap: 10px;
+                margin-top: 5px;
+                flex-wrap: wrap;
+
+                /* General Styles for .innerBigBox */
+
+                .rectBox {
+                  padding: 10px;
+                  border-radius: 5px;
+                  height: 40px;
+                  background: #fff;
+                  color: #000;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @media only screen and (max-width: 768px) {
+      flex-direction: column;
+      height: 155vh;
+
+      .layout {
+        height: auto;
+      }
+      .left {
+        border-radius: 0;
+        width: 100%;
+        height: 140vh;
+        .subLeft {
+          .rectangle {
+            height: auto;
+
+            .innerRect {
+              ul {
+                li {
+                  width: calc(330px / 2);
+                  //  padding: 0px 5px;
+                }
+              }
+            }
+          }
+          .box {
+            height: auto;
+          }
+        }
+        .bigBox {
+          width: 100%;
+          .innerBigBox {
+            flex-wrap: wrap;
+          }
+        }
+
+        .rectangle {
+          width: 100%;
+        }
+      }
+
+      .right {
+        width: 100%;
+        margin-top: 20px;
+        height: 205vh;
+        border-radius: 0;
+        .innerRight {
+          .box {
+            height: auto;
+          }
+        }
+      }
+    }
+    @media only screen and (max-width: 992px) {
+      .right {
+        height: 100%;
+      }
+    }
+  }
+}
