@@ -6,7 +6,7 @@
 
   .layout {
     width: 100%;
-    // height: 100vh;
+    height: 100vh;
     background: #202221;
     display: flex;
     gap: 10px;
@@ -28,13 +28,14 @@
 
         .box {
           width: 45%;
-          height: 12vh;
+          height: 13vh;
           background: #202221;
           border-radius: 10px;
           margin: 10px 10px 10px 10px;
           padding: 10px;
           display: flex;
-          justify-content: center;
+          // justify-content: center;
+          flex-direction: column;
           align-items: center;
 
           /* General Styles for .box */
@@ -55,6 +56,7 @@
           /* General Styles for .bigBox */
 
           .innerBigBox {
+            visibility: hidden;
             display: flex;
             gap: 10px;
 

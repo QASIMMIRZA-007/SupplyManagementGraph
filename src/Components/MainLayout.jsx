@@ -67,22 +67,42 @@ function MainLayout() {
               <div className="flex al  jc">
                 <div className={style.box}>
                   <div className={`${style.boxData}`}></div>
-                  Current -
-                  <span className="miniBox">
+                  Current 
+                  <div className="d-flex al-c jc-sp">
+                   <div>A</div> 
+                    <div>B</div> 
+                    <div>C</div>
+                  </div>
+                  {/* <span className="miniBox">
                     {data.value1.value} {data.value1.unit}
-                  </span>
+                  </span> */}
                 </div>
                 <div className={style.box}>
                   {" "}
-                  Power -<span className="miniBox">{data.value2.value} {data.value2.unit} </span>{" "}
+                  Power 
+                  <div className="d-flex al-c jc-sp">
+                   <div>A</div> 
+                    <div>B</div> 
+                    <div>C</div>
+                  </div>
                 </div>
               </div>
               <div className="flex al  jc">
                 <div className={style.box}>
-                  Voltage -<span className="miniBox">{data.value3.value}  {data.value3.unit}</span>
+                  Voltage 
+                  <div className="d-flex al-c jc-sp">
+                   <div>A</div> 
+                    <div>B</div> 
+                    <div>C</div>
+                  </div>
                 </div>
                 <div className={style.box}>
-                  Frequency -<span className="miniBox">{data.value4.value} {data.value4.unit}</span>
+                  Frequency 
+                  <div className="d-flex al-c jc-sp">
+                   <div>A</div> 
+                    <div>B</div> 
+                    <div>C</div>
+                  </div>
                 </div>
               </div>
               <div className={style.bigBox}>
@@ -99,13 +119,13 @@ function MainLayout() {
                   <div className={style.innerRect}>
                     {selectedOption}
                     <ul style={{ display: isListVisible ? "block" : "none" }}>
-                      <li onClick={() => handleOptionSelect("Voltage")}>
-                        Voltage
-                      </li>
                       <li onClick={() => handleOptionSelect("Current")}>
                         Current
                       </li>
-                      <li onClick={() => handleOptionSelect("Power")}>Power</li>
+                      <li onClick={() => handleOptionSelect("Power")}>
+                        Power
+                      </li>
+                      <li onClick={() => handleOptionSelect("Frequency")}>Frequency</li>
                     </ul>
                     <span>
                       {" "}
@@ -117,8 +137,8 @@ function MainLayout() {
                   <div className={style.innerRect}>
                     {selectedHistory}
                     <ul style={{ display: history ? "block" : "none" }}>
-                      <li onClick={() => handleHistorySelect("Last Hour ")}>
-                        Last Hour
+                      <li onClick={() => handleHistorySelect("Last  7 days ")}>
+                        Last  7 days
                       </li>
                       <li onClick={() => handleHistorySelect("Today ")}>
                         Today
@@ -155,11 +175,11 @@ function MainLayout() {
                 </form>
               </div>
               <div className={style.box}>
-                <b>Overall Maintaince</b>
+                <b>Humindity</b>
                 <NeedleChart2 />
               </div>
               <div className={style.box}>
-              <b>Usage</b>
+              <b>Temprature</b>
                 <NeedleChart4 />
               </div>
             </div>
