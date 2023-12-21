@@ -6,7 +6,7 @@
 
   .layout {
     width: 100%;
-    height: 100vh;
+    // height: 100vh;
     background: #202221;
     display: flex;
     gap: 10px;
@@ -183,15 +183,16 @@
 
     @media only screen and (max-width: 768px) {
       flex-direction: column;
-      height: 155vh;
+      height: 170vh;
 
       .layout {
         height: auto;
+       
       }
       .left {
         border-radius: 0;
         width: 100%;
-        height: 140vh;
+        height: 162vh;
         .subLeft {
           .rectangle {
             height: auto;
@@ -199,7 +200,7 @@
             .innerRect {
               ul {
                 li {
-                  width: calc(330px / 2);
+                  width: calc(280px / 2);
                   //  padding: 0px 5px;
                 }
               }
