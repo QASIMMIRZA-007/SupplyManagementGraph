@@ -1,56 +1,55 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-body,html{
+body,
+html {
   height: 100%;
   width: 100%;
   background: #000;
   color: #fff;
-  font-family: 'Montserrat', sans-serif;
-
+  font-family: "Montserrat", sans-serif;
 }
-.flex{
+.flex {
   display: flex;
 }
-.al{
+.al {
   align-items: center;
 }
-.g-1{
+.g-1 {
   gap: 10px;
- 
 }
-.jc{
+.jc {
   justify-content: center;
 }
-ul{
+ul {
   display: none;
 }
-.recharts-wrapper{
+.recharts-wrapper {
   max-width: 400px !important;
- max-height: 300px !important;
+  max-height: 300px !important;
 }
-.miniBox{
+.miniBox {
   background: #fff;
   color: #000;
- border-radius: 5px;
+  border-radius: 5px;
   // width: 40px;
-  padding:  5px 10px;
+  padding: 5px 10px;
   font-size: 19px;
 }
-@media screen and (max-width:768px) {
-  .miniBox{
+@media screen and (max-width: 768px) {
+  .miniBox {
     padding: 2px 4px;
   }
 }
-.smBox{
+.smBox {
   height: 15vh !important;
   background: red;
 }
-.d-flex{
-display: flex;
-align-items: center;
-gap: 51px;
-padding-top: 3px;
+.d-flex {
+  display: flex;
+  align-items: center;
+  gap: 51px;
+  padding-top: 3px;
 }

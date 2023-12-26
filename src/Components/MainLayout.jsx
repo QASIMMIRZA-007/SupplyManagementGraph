@@ -1,10 +1,9 @@
 import { useState, useEffect } from "react";
-// import style from "./mainLayout.module.scss";
+import { IoIosArrowDropdown } from "react-icons/io";
 import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
-import { IoIosArrowDropdown } from "react-icons/io";
-import style from './mainLayout.module.scss'
+import style from "./mainLayout.module.scss";
 
 function generateRandomData() {
   return {
@@ -12,19 +11,18 @@ function generateRandomData() {
       value: Math.floor(Math.random() * 100),
       unit: "A", //amphere
     },
-    value2:{ 
+    value2: {
       value: Math.floor(Math.random() * 100),
       unit: "W", //watt
     },
-    value3:{
+    value3: {
       value: Math.floor(Math.random() * 100),
       unit: "Volt", //volt
     },
-    value4:{
+    value4: {
       value: Math.floor(Math.random() * 100),
       unit: "Hz", //hertzz
-    }
-    
+    },
   };
 }
 
@@ -58,6 +56,43 @@ function MainLayout() {
     setData(generateRandomData());
   }, [selectedOption, selectedHistory]);
 
+  const boxData = {
+    20231121210443: {
+      Enviornment: {
+        Humidity: 48.1,
+        Temperature: 23,
+      },
+      Sensor1: {
+        Current: 0.106,
+        Energy: 1.685,
+        Frequency: 50,
+        Power: 1.4,
+        PowerFactor: 0.06,
+        Voltage: 233.60001,
+      },
+      Sensor2: {
+        Current: 0.105,
+        Energy: 0.01,
+        Frequency: 50,
+        Power: 1.3,
+        PowerFactor: 0.05,
+        Voltage: 233.60001,
+      },
+      Sensor3: {
+        Current: 0.106,
+        Energy: 0.128,
+        Frequency: 50,
+        Power: 1.3,
+        PowerFactor: 0.05,
+        Voltage: 233.8,
+      },
+    },
+  };
+
+  const sensorObjects = Object.values(boxData).map(
+    ({ Enviornment, ...sensors }) => sensors
+  );
+
   return (
     <>
       <div className={style.mainLayout}>
@@ -65,53 +100,67 @@ function MainLayout() {
           <div className={style.left}>
             <div className={style.subLeft}>
               <div className="flex al  jc">
-                <div className={style.box}>
-                  <div className={`${style.boxData}`}></div>
-                  Current 
-                  <div className="d-flex al-c jc-sp">
-                   <div>A</div> 
-                    <div>B</div> 
-                    <div>C</div>
+                {sensorObjects.map((sensor, index) => (
+                  <div key={index} className={style.box}>
+                    {/* <div className={`${style.boxData}`}></div> */}
+                    Current
+                    <div className="d-flex al-c jc-sp">
+                      <div>{sensor[`Sensor${index + 1}`].Current}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Current}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Current}</div>
+                    </div>
                   </div>
-                  {/* <span className="miniBox">
-                    {data.value1.value} {data.value1.unit}
-                  </span> */}
-                </div>
-                <div className={style.box}>
-                  {" "}
-                  Power 
-                  <div className="d-flex al-c jc-sp">
-                   <div>A</div> 
-                    <div>B</div> 
-                    <div>C</div>
+                ))}
+                {sensorObjects.map((sensor, index) => (
+                  <div key={index} className={style.box}>
+                    {/* <div className={`${style.boxData}`}></div> */}
+                    Power
+                    <div className="d-flex al-c jc-sp">
+                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
               <div className="flex al  jc">
-                <div className={style.box}>
-                  Voltage 
-                  <div className="d-flex al-c jc-sp">
-                   <div>A</div> 
-                    <div>B</div> 
-                    <div>C</div>
+                {sensorObjects.map((sensor, index) => (
+                  <div key={index} className={style.box}>
+                    Voltage
+                    <div className="d-flex al-c jc-sp">
+                      <div>{sensor[`Sensor${index + 1}`].Voltage}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Voltage}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Voltage}</div>
+                    </div>
                   </div>
-                </div>
-                <div className={style.box}>
-                  Frequency 
-                  <div className="d-flex al-c jc-sp">
-                   <div>A</div> 
-                    <div>B</div> 
-                    <div>C</div>
+                ))}
+                {sensorObjects.map((sensor, index) => (
+                  <div key={index} className={style.box}>
+                    Frequency
+                    <div className="d-flex al-c jc-sp">
+                      <div>{sensor[`Sensor${index + 1}`].Frequency}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Frequency}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Frequency}</div>
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
+
               <div className={style.bigBox}>
                 <BarChart />
                 <div className={style.innerBigBox}>
-                <div className={style.rectBox}>{data.value1.value} {data.value1.unit}</div>
-                  <div className={style.rectBox}>{data.value2. value} {data.value2.unit}</div>
-                  <div className={style.rectBox}>{data.value3. value} {data.value3.unit}</div>
-                  <div className={style.rectBox}>{data.value4. value} {data.value4.unit}</div>
+                  <div className={style.rectBox}>
+                    {data.value1.value} {data.value1.unit}
+                  </div>
+                  <div className={style.rectBox}>
+                    {data.value2.value} {data.value2.unit}
+                  </div>
+                  <div className={style.rectBox}>
+                    {data.value3.value} {data.value3.unit}
+                  </div>
+                  <div className={style.rectBox}>
+                    {data.value4.value} {data.value4.unit}
+                  </div>
                 </div>
               </div>
               <div className="flex al  jc">
@@ -122,10 +171,10 @@ function MainLayout() {
                       <li onClick={() => handleOptionSelect("Current")}>
                         Current
                       </li>
-                      <li onClick={() => handleOptionSelect("Power")}>
-                        Power
+                      <li onClick={() => handleOptionSelect("Power")}>Power</li>
+                      <li onClick={() => handleOptionSelect("Frequency")}>
+                        Frequency
                       </li>
-                      <li onClick={() => handleOptionSelect("Frequency")}>Frequency</li>
                     </ul>
                     <span>
                       {" "}
@@ -138,7 +187,7 @@ function MainLayout() {
                     {selectedHistory}
                     <ul style={{ display: history ? "block" : "none" }}>
                       <li onClick={() => handleHistorySelect("Last  7 days ")}>
-                        Last  7 days
+                        Last 7 days
                       </li>
                       <li onClick={() => handleHistorySelect("Today ")}>
                         Today
@@ -165,12 +214,11 @@ function MainLayout() {
                     Currently Units
                     {/* <input type="text" className={style.boxInput} /> */}
                     <div className={style.innerBigBox}>
-                  
-                  <div className={style.rectBox}>{data.value1.value}</div>
-                  <div className={style.rectBox}>{data.value2. value}</div>
-                  <div className={style.rectBox}>{data.value3. value}</div>
-                  <div className={style.rectBox}>{data.value4. value}</div>
-                </div>
+                      <div className={style.rectBox}>{data.value1.value}</div>
+                      <div className={style.rectBox}>{data.value2.value}</div>
+                      <div className={style.rectBox}>{data.value3.value}</div>
+                      <div className={style.rectBox}>{data.value4.value}</div>
+                    </div>
                   </label>
                 </form>
               </div>
@@ -179,7 +227,7 @@ function MainLayout() {
                 <NeedleChart2 />
               </div>
               <div className={style.box}>
-              <b>Temprature</b>
+                <b>Temprature</b>
                 <NeedleChart4 />
               </div>
             </div>
