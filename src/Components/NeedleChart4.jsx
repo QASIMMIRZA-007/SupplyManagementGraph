@@ -2,7 +2,6 @@
 
 import React, { Component } from "react";
 import { render } from "react-dom";
-
 import GaugeChart from "react-gauge-chart";
 
 export default class App extends Component {
@@ -26,8 +25,7 @@ export default class App extends Component {
         //   hideText={true} // If you want to hide the text
         />
         <div className="text">
-          {/* <h3 className="pie-heading">45.06 %</h3>
-          <p className="pie-para">consumed from the grid</p> */}
+        
         </div>
       </div>
     );

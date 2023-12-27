@@ -4,7 +4,10 @@ import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
 import style from "./mainLayout.module.scss";
+   // importing firebass related modules
+import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
 
+// genetrating random data with generateRandomData.
 function generateRandomData() {
   return {
     value1: {
@@ -27,6 +30,7 @@ function generateRandomData() {
 }
 
 function MainLayout() {
+  // state of the component
   const [isListVisible, setListVisibility] = useState(false);
   const [history, setHistory] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Voltage");
@@ -52,10 +56,9 @@ function MainLayout() {
   };
 
   useEffect(() => {
-    // Update random data when selectedOption or selectedHistory changes
     setData(generateRandomData());
   }, [selectedOption, selectedHistory]);
-
+  // Json imported data to map over the boxes.
   const boxData = {
     20231121210443: {
       Enviornment: {
@@ -93,6 +96,16 @@ function MainLayout() {
     ({ Enviornment, ...sensors }) => sensors
   );
 
+  // Get a list of cities from your database
+  async function getCities(db) {
+    const citiesCol = collection(db, "dev1gf");
+    const citySnapshot = await getDocs(citiesCol);
+    const cityList = citySnapshot.docs.map((doc) => doc.data());
+    return cityList;
+   }
+
+  console.log(getCities(), "running");
+
   return (
     <>
       <div className={style.mainLayout}>
@@ -102,7 +115,6 @@ function MainLayout() {
               <div className="flex al  jc">
                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
-                    {/* <div className={`${style.boxData}`}></div> */}
                     Current
                     <div className="d-flex al-c jc-sp">
                       <div>{sensor[`Sensor${index + 1}`].Current}</div>
@@ -113,7 +125,6 @@ function MainLayout() {
                 ))}
                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
-                    {/* <div className={`${style.boxData}`}></div> */}
                     Power
                     <div className="d-flex al-c jc-sp">
                       <div>{sensor[`Sensor${index + 1}`].Power}</div>
@@ -123,6 +134,7 @@ function MainLayout() {
                   </div>
                 ))}
               </div>
+
               <div className="flex al  jc">
                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
@@ -212,13 +224,17 @@ function MainLayout() {
                   <label>
                     {" "}
                     Currently Units
-                    {/* <input type="text" className={style.boxInput} /> */}
-                    <div className={style.innerBigBox}>
-                      <div className={style.rectBox}>{data.value1.value}</div>
-                      <div className={style.rectBox}>{data.value2.value}</div>
-                      <div className={style.rectBox}>{data.value3.value}</div>
-                      <div className={style.rectBox}>{data.value4.value}</div>
-                    </div>
+                    {sensorObjects.map((sensor, index) => (
+                      <div key={index} className={style.innerBigBox}>
+                        <div className={style.rectBox}>
+                          {sensor[`Sensor${index + 1}`].Frequency}
+                        </div>
+
+                        <div className={style.rectBox}>{data.value2.value}</div>
+                        <div className={style.rectBox}>{data.value3.value}</div>
+                        <div className={style.rectBox}>{data.value4.value}</div>
+                      </div>
+                    ))}
                   </label>
                 </form>
               </div>
