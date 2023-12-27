@@ -1,12 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { IoIosArrowDropdown } from "react-icons/io";
 import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
 import style from "./mainLayout.module.scss";
-   // importing firebass related modules
+// importing firebass related modules
 import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
-
+import { db } from "../firebaseConfig";
 // genetrating random data with generateRandomData.
 function generateRandomData() {
   return {
@@ -102,7 +102,9 @@ function MainLayout() {
     const citySnapshot = await getDocs(citiesCol);
     const cityList = citySnapshot.docs.map((doc) => doc.data());
     return cityList;
-   }
+  }
+
+  
 
   console.log(getCities(), "running");
 
@@ -112,7 +114,7 @@ function MainLayout() {
         <div className={style.layout}>
           <div className={style.left}>
             <div className={style.subLeft}>
-              <div className="flex al  jc">
+              <div className="flex al a jc">
                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
                     Current
@@ -255,3 +257,5 @@ function MainLayout() {
 }
 
 export default MainLayout;
+// Documention about the code..
+// this code is totally arrange able by the developer. there is a data object which is mapped to get some specific results.now firebase code is initialized by not used yet because ogf thata sir Coz he is not helping me in any case so please this is not my guilt. if anybody helps me then i can do exactly workwithin 15 minutes.
