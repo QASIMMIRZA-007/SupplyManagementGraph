@@ -1,12 +1,15 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { IoIosArrowDropdown } from "react-icons/io";
+import { onValue, ref } from "firebase/database";
 import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
 import style from "./mainLayout.module.scss";
+
 // importing firebass related modules
-import { getFirestore, collection, getDocs } from "firebase/firestore/lite";
+// import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
+
 // genetrating random data with generateRandomData.
 function generateRandomData() {
   return {
@@ -32,10 +35,13 @@ function generateRandomData() {
 function MainLayout() {
   // state of the component
   const [isListVisible, setListVisibility] = useState(false);
+  // const [projects, setProjects] = useState([]);
+  // console.log("prroduct", projects);
   const [history, setHistory] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Voltage");
   const [selectedHistory, setSelectedHistory] = useState("Last 7 days");
   const [data, setData] = useState(generateRandomData());
+  const [cities, setCities] = useState(null);
 
   const toggleListVisibility = () => {
     setListVisibility(!isListVisible);
@@ -96,15 +102,47 @@ function MainLayout() {
     ({ Enviornment, ...sensors }) => sensors
   );
 
-  // Get a list of cities from your database
-  async function getCities(db) {
-    const citiesCol = collection(db, "dev1gf");
-    const citySnapshot = await getDocs(citiesCol);
-    const cityList = citySnapshot.docs.map((doc) => doc.data());
-    return cityList;
+  // Database related code presents here
+
+  async function getCities() {
+    try {
+      const citiesRef = ref(db, "dev1gf");
+
+      // Use a Promise to wait for the callback to be invoked
+      return new Promise((resolve, reject) => {
+        onValue(
+          citiesRef,
+          (snapshot) => {
+            const cityList = snapshot.val();
+
+            resolve(cityList);
+          },
+          (error) => {
+            reject(error);
+          }
+        );
+      });
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
   }
 
-  console.log(getCities(), "running");
+  // Use case the async function
+  (async () => {
+    try {
+      const cities = await getCities();
+      console.log("data:", cities);
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  })();
+
+  useEffect(() => {
+    getCities()
+      .then((data) => setCities(data))
+      .catch((error) => console.error("Error:", error));
+  }, []);
 
   return (
     <>
@@ -113,17 +151,63 @@ function MainLayout() {
           <div className={style.left}>
             <div className={style.subLeft}>
               <div className="flex al a jc">
-                {sensorObjects.map((sensor, index) => (
+                {/* {cities &&
+                  Object.entries(cities).map(([key, value]) => (
+                    <div key={key} className={style.box}>
+                      Current
+                      <div className="d-flex al-c jc-sp">
+                        <div>
+                          {cities[Object.keys(cities).pop()].Sensor1?.Current}
+                        </div>
+                        <div>
+                          {cities[Object.keys(cities).pop()].Sensor2?.Current}
+                        </div>
+                        <div>
+                          {cities[Object.keys(cities).pop()].Sensor3?.Current}
+                        </div>
+                      </div>
+                    </div>
+                  ))} */}
+                   {/* <div className={style.box}  key={Object.keys(cities).pop()}>
+      Last Data
+      <div className="d-flex al-c jc-sp">
+        <div>
+          {cities[Object.keys(cities).pop()].Sensor1?.Current}
+        </div>
+        <div>
+          {cities[Object.keys(cities).pop()].Sensor2?.Current}
+        </div>
+        <div>
+          {cities[Object.keys(cities).pop()].Sensor3?.Current}
+        </div>
+      </div>
+    </div> */}
+{/* 
+                {cities &&
+                  Object.entries(cities).map(([key, value]) => (
+                    <div key={key} className={style.box}>
+                      Power
+                      <div className="d-flex al-c jc-sp">
+                        <div>{value?.Sensor1?.Power}</div>
+                        <div>{value?.Sensor2?.Power}</div>
+                        <div>{value?.Sensor3?.Power}</div>
+                      </div>
+                    </div>
+                  ))} */}
+              </div>
+
+              <div className="flex al  jc">
+              {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
-                    Current
+                    Power
                     <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Current}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Current}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Current}</div>
+                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
                     </div>
                   </div>
                 ))}
-                {sensorObjects.map((sensor, index) => (
+                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
                     Power
                     <div className="d-flex al-c jc-sp">
@@ -134,25 +218,24 @@ function MainLayout() {
                   </div>
                 ))}
               </div>
-
               <div className="flex al  jc">
-                {sensorObjects.map((sensor, index) => (
+              {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
-                    Voltage
+                    Power
                     <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Voltage}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Voltage}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Voltage}</div>
+                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
                     </div>
                   </div>
                 ))}
-                {sensorObjects.map((sensor, index) => (
+                 {sensorObjects.map((sensor, index) => (
                   <div key={index} className={style.box}>
-                    Frequency
+                    Power
                     <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Frequency}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Frequency}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Frequency}</div>
+                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
+                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
                     </div>
                   </div>
                 ))}
@@ -224,17 +307,13 @@ function MainLayout() {
                   <label>
                     {" "}
                     Currently Units
-                    {sensorObjects.map((sensor, index) => (
-                      <div key={index} className={style.innerBigBox}>
-                        <div className={style.rectBox}>
-                          {sensor[`Sensor${index + 1}`].Frequency}
-                        </div>
+                    <div className={style.innerBigBox}>
+                      <div className={style.rectBox}>{data.value2.value}</div>
 
-                        <div className={style.rectBox}>{data.value2.value}</div>
-                        <div className={style.rectBox}>{data.value3.value}</div>
-                        <div className={style.rectBox}>{data.value4.value}</div>
-                      </div>
-                    ))}
+                      <div className={style.rectBox}>{data.value2.value}</div>
+                      <div className={style.rectBox}>{data.value3.value}</div>
+                      <div className={style.rectBox}>{data.value4.value}</div>
+                    </div>
                   </label>
                 </form>
               </div>
