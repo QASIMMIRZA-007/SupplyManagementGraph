@@ -104,8 +104,6 @@ function MainLayout() {
     return cityList;
   }
 
-  
-
   console.log(getCities(), "running");
 
   return (
@@ -257,5 +255,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-// Documention about the code..
-// this code is totally arrange able by the developer. there is a data object which is mapped to get some specific results.now firebase code is initialized by not used yet because ogf thata sir Coz he is not helping me in any case so please this is not my guilt. if anybody helps me then i can do exactly workwithin 15 minutes.
