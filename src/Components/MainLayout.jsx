@@ -64,43 +64,7 @@ function MainLayout() {
   useEffect(() => {
     setData(generateRandomData());
   }, [selectedOption, selectedHistory]);
-  // Json imported data to map over the boxes.
-  const boxData = {
-    20231121210443: {
-      Enviornment: {
-        Humidity: 48.1,
-        Temperature: 23,
-      },
-      Sensor1: {
-        Current: 0.106,
-        Energy: 1.685,
-        Frequency: 50,
-        Power: 1.4,
-        PowerFactor: 0.06,
-        Voltage: 233.60001,
-      },
-      Sensor2: {
-        Current: 0.105,
-        Energy: 0.01,
-        Frequency: 50,
-        Power: 1.3,
-        PowerFactor: 0.05,
-        Voltage: 233.60001,
-      },
-      Sensor3: {
-        Current: 0.106,
-        Energy: 0.128,
-        Frequency: 50,
-        Power: 1.3,
-        PowerFactor: 0.05,
-        Voltage: 233.8,
-      },
-    },
-  };
 
-  const sensorObjects = Object.values(boxData).map(
-    ({ Enviornment, ...sensors }) => sensors
-  );
 
   // Database related code presents here
 
@@ -151,94 +115,86 @@ function MainLayout() {
           <div className={style.left}>
             <div className={style.subLeft}>
               <div className="flex al a jc">
-                {/* {cities &&
-                  Object.entries(cities).map(([key, value]) => (
-                    <div key={key} className={style.box}>
-                      Current
-                      <div className="d-flex al-c jc-sp">
-                        <div>
-                          {cities[Object.keys(cities).pop()].Sensor1?.Current}
-                        </div>
-                        <div>
-                          {cities[Object.keys(cities).pop()].Sensor2?.Current}
-                        </div>
-                        <div>
-                          {cities[Object.keys(cities).pop()].Sensor3?.Current}
-                        </div>
-                      </div>
-                    </div>
-                  ))} */}
-                   {/* <div className={style.box}  key={Object.keys(cities).pop()}>
-      Last Data
-      <div className="d-flex al-c jc-sp">
-        <div>
-          {cities[Object.keys(cities).pop()].Sensor1?.Current}
-        </div>
-        <div>
-          {cities[Object.keys(cities).pop()].Sensor2?.Current}
-        </div>
-        <div>
-          {cities[Object.keys(cities).pop()].Sensor3?.Current}
-        </div>
-      </div>
-    </div> */}
-{/* 
                 {cities &&
-                  Object.entries(cities).map(([key, value]) => (
-                    <div key={key} className={style.box}>
-                      Power
-                      <div className="d-flex al-c jc-sp">
-                        <div>{value?.Sensor1?.Power}</div>
-                        <div>{value?.Sensor2?.Power}</div>
-                        <div>{value?.Sensor3?.Power}</div>
-                      </div>
-                    </div>
-                  ))} */}
+                  Object.entries(cities).map(([key, value], index) => {
+                    if (index === 0) {
+                      // Process only the first object
+                      return (
+                        <div key={key} className={style.box}>
+                          Current
+                          <div className="d-flex al-c jc-sp">
+                            <div>{value?.Sensor1?.Current}</div>
+                            <div>{value?.Sensor2?.Current}</div>
+                            <div>{value?.Sensor3?.Current}</div>
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      // Return null for the subsequent objects
+                      return null;
+                    }
+                  })}
+                {/* Power */}
+                {cities &&
+                  Object.entries(cities).map(([key, value], index) => {
+                    if (index === 0) {
+                      // Process only the first object
+                      return (
+                        <div key={key} className={style.box}>
+                          Power
+                          <div className="d-flex al-c jc-sp">
+                            <div>{value?.Sensor1?.Power}</div>
+                            <div>{value?.Sensor2?.Power}</div>
+                            <div>{value?.Sensor3?.Power}</div>
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      // Return null for the subsequent objects
+                      return null;
+                    }
+                  })}
               </div>
 
               <div className="flex al  jc">
-              {sensorObjects.map((sensor, index) => (
-                  <div key={index} className={style.box}>
-                    Power
-                    <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
-                    </div>
-                  </div>
-                ))}
-                 {sensorObjects.map((sensor, index) => (
-                  <div key={index} className={style.box}>
-                    Power
-                    <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <div className="flex al  jc">
-              {sensorObjects.map((sensor, index) => (
-                  <div key={index} className={style.box}>
-                    Power
-                    <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
-                    </div>
-                  </div>
-                ))}
-                 {sensorObjects.map((sensor, index) => (
-                  <div key={index} className={style.box}>
-                    Power
-                    <div className="d-flex al-c jc-sp">
-                      <div>{sensor[`Sensor${index + 1}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 2}`].Power}</div>
-                      <div>{sensor[`Sensor${index + 3}`].Power}</div>
-                    </div>
-                  </div>
-                ))}
+                {cities &&
+                  Object.entries(cities).map(([key, value], index) => {
+                    if (index === 0) {
+                      // Process only the first object
+                      return (
+                        <div key={key} className={style.box}>
+                          Voltage
+                          <div className="d-flex al-c jc-sp">
+                            <div>{value?.Sensor1?.Voltage}</div>
+                            <div>{value?.Sensor2?.Voltage}</div>
+                            <div>{value?.Sensor3?.Voltage}</div>
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      // Return null for the subsequent objects
+                      return null;
+                    }
+                  })}
+                {cities &&
+                  Object.entries(cities).map(([key, value], index) => {
+                    if (index === 0) {
+                      // Process only the first object
+                      return (
+                        <div key={key} className={style.box}>
+                          Frequency
+                          <div className="d-flex al-c jc-sp">
+                            <div>{value?.Sensor1?.Frequency}</div>
+                            <div>{value?.Sensor2?.Frequency}</div>
+                            <div>{value?.Sensor3?.Frequency}</div>
+                          </div>
+                        </div>
+                      );
+                    } else {
+                      // Return null for the subsequent objects
+                      return null;
+                    }
+                  })}
               </div>
 
               <div className={style.bigBox}>
