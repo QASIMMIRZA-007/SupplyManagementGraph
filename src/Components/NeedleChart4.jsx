@@ -18,15 +18,13 @@ export default class App extends Component {
         <GaugeChart
           id="gauge-chart"
           nrOfLevels={1}
-          colors={["#ff0000"]}
+          colors={["#ff0"]}
           arcWidth={0.3}
-          percent={0.80}
-          textColor={"#ff0000"}
+          percent={0.22}
+          textColor={"#ff0"}
         //   hideText={true} // If you want to hide the text
         />
-        <div className="text">
-        
-        </div>
+    
       </div>
     );
   }

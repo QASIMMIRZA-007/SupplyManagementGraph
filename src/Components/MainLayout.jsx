@@ -65,7 +65,6 @@ function MainLayout() {
     setData(generateRandomData());
   }, [selectedOption, selectedHistory]);
 
-
   // Database related code presents here
 
   async function getCities() {
@@ -275,7 +274,7 @@ function MainLayout() {
               </div>
               <div className={style.box}>
                 <b>Humindity</b>
-                <NeedleChart2 />
+                <NeedleChart2 item={cities} />
               </div>
               <div className={style.box}>
                 <b>Temprature</b>
