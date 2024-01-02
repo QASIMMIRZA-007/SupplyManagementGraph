@@ -214,11 +214,11 @@ height: auto;
           .box {
             height: auto;
             gap: auto;
-            width: 85%;
+            width: 100%;
           }
         }
         .bigBox {
-          width: 90%;
+          width: 100%;
           .innerBigBox {
             flex-wrap: wrap;
           }
@@ -237,7 +237,8 @@ height: auto;
         .innerRight {
           .box {
             height: auto;
-
+            width: 95%;
+            
           }
         }
       }
