@@ -14,10 +14,16 @@ html {
 }
 .flex {
   display: flex;
+  flex-wrap: wrap;
+  
+}
+.flexx{
+  display: flex;
 }
 .al {
   align-items: center;
 }
+
 .g-1 {
   gap: 10px;
 }
@@ -42,6 +48,11 @@ ul {
 @media screen and (max-width: 768px) {
   .miniBox {
     padding: 2px 4px;
+  }
+  .d-flex {
+    
+    gap: 40px !important;
+   
   }
 }
 .smBox {

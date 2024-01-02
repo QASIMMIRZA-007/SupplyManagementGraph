@@ -169,12 +169,12 @@ function MainLayout() {
               <div className="flex al  jc">
                 {cities &&
                   Object.entries(cities).map(([key, value], index) => {
-                    if (index === 0) {
+                    if (index === 1) {
                       // Process only the first object
                       return (
                         <div key={key} className={style.box}>
                           Voltage
-                          <div className="d-flex al-c jc-sp">
+                          <div className="d-flex al-c jc-sp ">
                          
                           <div>A</div>
                             <div>B</div>
@@ -238,7 +238,7 @@ function MainLayout() {
                   </div>
                 </div>
               </div>
-              <div className="flex al  jc">
+              <div className="flexx al  jc">
                 <div className={style.rectangle}>
                   <div className={style.innerRect}>
                     {selectedOption}
