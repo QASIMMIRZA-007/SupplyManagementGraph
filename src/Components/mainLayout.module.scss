@@ -6,6 +6,7 @@
     width: 100%;
     height: 100vh;
     background: #202221;
+    // background: #000;
     display: flex;
     gap: 10px;
     align-items: center;
@@ -187,17 +188,17 @@
 
     @media only screen and (max-width: 768px) {
       flex-direction: column;
-      height: 170vh;
-
+      // height: 170vh;
+height: auto;
       .layout {
         height: auto;
       }
       .left {
         border-radius: 0;
         width: 100%;
-        height: 162vh;
+        height: 122vh;
         .subLeft {
-          height: 100vh;
+          height: 112vh;
           .rectangle {
             height: auto;
 
