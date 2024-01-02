@@ -122,6 +122,12 @@ function MainLayout() {
                         <div key={key} className={style.box}>
                           Current
                           <div className="d-flex al-c jc-sp">
+                          
+                          <div>A</div>
+                            <div>B</div>
+                            <div>C</div>
+                            </div>
+                            <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Current}</div>
                             <div>{value?.Sensor2?.Current}</div>
                             <div>{value?.Sensor3?.Current}</div>
@@ -142,6 +148,11 @@ function MainLayout() {
                         <div key={key} className={style.box}>
                           Power
                           <div className="d-flex al-c jc-sp">
+                          <div>A</div>
+                            <div>B</div>
+                            <div>C</div>
+                            </div>
+                            <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Power}</div>
                             <div>{value?.Sensor2?.Power}</div>
                             <div>{value?.Sensor3?.Power}</div>
@@ -164,6 +175,12 @@ function MainLayout() {
                         <div key={key} className={style.box}>
                           Voltage
                           <div className="d-flex al-c jc-sp">
+                         
+                          <div>A</div>
+                            <div>B</div>
+                            <div>C</div>
+                            </div>
+                            <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Voltage}</div>
                             <div>{value?.Sensor2?.Voltage}</div>
                             <div>{value?.Sensor3?.Voltage}</div>
@@ -183,6 +200,14 @@ function MainLayout() {
                         <div key={key} className={style.box}>
                           Frequency
                           <div className="d-flex al-c jc-sp">
+                         
+                         
+                         <div>A</div>
+                           <div>B</div>
+                           <div>C</div>
+                           </div>
+                           <div className="d-flex al-c jc-sp">
+                            
                             <div>{value?.Sensor1?.Frequency}</div>
                             <div>{value?.Sensor2?.Frequency}</div>
                             <div>{value?.Sensor3?.Frequency}</div>

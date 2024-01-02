@@ -26,23 +26,24 @@
 
         .box {
           width: 45%;
-          height: 13vh;
+          height: 15vh;
+          // padding: 10px;
           background: #202221;
           border-radius: 10px;
-          margin: 10px ;
-          padding: 10px;
+          margin: 8px ;
+          padding: 6px;
           display: flex;
           // justify-content: center;
           flex-direction: column;
           align-items: center;
-          gap: 8px;
+          gap: 4px;
 
           /* General Styles for .box */
         }
 
         .bigBox {
           width: calc(90% + 20px);
-          height: 30vh;
+          height: 27vh;
           background: #202221;
           border-radius: 10px;
           position: relative;
