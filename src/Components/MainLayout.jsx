@@ -197,7 +197,7 @@ function MainLayout() {
                     if (index === 0) {
                       // Process only the first object
                       return (
-                        <div key={key} className={style.box}>
+                        <div key={key} className= {`${style.box} margin `} >
                           Frequency
                           <div className="d-flex al-c jc-sp">
                          <div>A</div>
