@@ -37,7 +37,7 @@
           flex-direction: column;
           align-items: center;
           gap: 4px;
-          flex-wrap: wrap;
+          // flex-wrap: wrap;
          
 
           /* General Styles for .box */
@@ -197,7 +197,7 @@
         width: 100%;
         height: 162vh;
         .subLeft {
-          height: 115vh;
+          height: 100vh;
           .rectangle {
             height: auto;
 

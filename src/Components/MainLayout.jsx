@@ -200,8 +200,6 @@ function MainLayout() {
                         <div key={key} className={style.box}>
                           Frequency
                           <div className="d-flex al-c jc-sp">
-                         
-                         
                          <div>A</div>
                            <div>B</div>
                            <div>C</div>
