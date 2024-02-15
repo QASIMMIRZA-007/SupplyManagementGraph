@@ -15,10 +15,30 @@ html {
 .flex {
   display: flex;
   flex-wrap: wrap;
-  
 }
+.downloadData {
+  border: 1px solid #eee;
+  width: 90%;
+  border-radius: 10px;
+  button {
+    padding: 10px 20px;
+    text-align: center;
+    width: 100%;
 
-.flexx{
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 20px;
+    border: 1px solid #eee;
+    transition: all 0.3s ease-in;
+
+    &:hover {
+      background: #000;
+      border: 1px solid #eee;
+      color: #fff;
+    }
+  }
+}
+.flexx {
   display: flex;
 }
 .al {
@@ -51,9 +71,7 @@ ul {
     padding: 2px 4px;
   }
   .d-flex {
-    
     gap: 40px !important;
-   
   }
 }
 .smBox {
