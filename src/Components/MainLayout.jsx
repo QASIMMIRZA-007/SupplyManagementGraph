@@ -3,7 +3,6 @@ import { IoIosArrowDropdown } from "react-icons/io";
 import { onValue, ref } from "firebase/database";
 import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
-import BarChart from "./BarChart";
 import style from "./mainLayout.module.scss";
 
 
@@ -11,6 +10,8 @@ import style from "./mainLayout.module.scss";
 // import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
 import CsvDownload from "react-csv-downloader";
+import CustomBarChart from "./CustomBarChart";
+import CustomLineChart from "./CustomLineChart";
 
 
 // genetrating random data with generateRandomData.
@@ -329,9 +330,55 @@ function MainLayout() {
                     }
                   })}
               </div>
-
+<div className={style.bigBoxWrapper}> 
               <div className={style.bigBox}>
-                <BarChart />
+               <CustomBarChart />
+               
+                
+             
+                <div className={style.innerBigBox} style={{visibility:"hidden"}}>
+                  <div className={style.vlaues}>
+                    {cities &&
+                      Object.entries(cities).map(([key, value], index) => {
+                        if (index === 0) {
+                          return (
+                            <table style={{ width: "100%" }}>
+                              <tr>
+                                <th>Values</th>
+                                <th>Min</th>
+                                <th>Max</th>
+                              </tr>
+                              <tr>
+                                <td>Current</td>
+                                <td>{value?.Sensor1?.Current}</td>
+                                <td>{value?.Sensor3?.Current}</td>
+                              </tr>
+                              <tr>
+                                <td>Power</td>
+                                <td>{value?.Sensor1?.Power}</td>
+                                <td>{value?.Sensor3?.Power}</td>
+                              </tr>
+                              <tr>
+                                <td>Voltage</td>
+                                <td>{value?.Sensor2?.Voltage}</td>
+                                <td>{value?.Sensor3?.Voltage}</td>
+                              </tr>
+                              <tr>
+                                <td>Frequency</td>
+                                <td>{value?.Sensor1?.Frequency}</td>
+                                <td>{value?.Sensor3?.Frequency}</td>
+                              </tr>
+                            </table>
+                          );
+                        }
+                      })}
+                  </div>
+                </div>
+              </div>
+              <div className={style.bigBox}>
+             <CustomLineChart />
+               
+                
              
                 <div className={style.innerBigBox}>
                   <div className={style.vlaues}>
@@ -372,6 +419,7 @@ function MainLayout() {
                   </div>
                 </div>
               </div>
+              </div>
 
               <div className="flexx al  jc">
                 <div className={style.rectangle}>
@@ -381,7 +429,7 @@ function MainLayout() {
                       <li onClick={() => handleOptionSelect("Current")}>
                         Current
                       </li>
-                      <li onClick={() => handleOptionSelect("Power")}>Power</li>
+                      {/* <li onClick={() => handleOptionSelect("Power")}>Power</li> */}
                       <li onClick={() => handleOptionSelect("Frequency")}>
                         Frequency
                       </li>
@@ -399,9 +447,9 @@ function MainLayout() {
                       <li onClick={() => handleHistorySelect("Last  7 days ")}>
                         Last 7 days
                       </li>
-                      <li onClick={() => handleHistorySelect("Today ")}>
+                      {/* <li onClick={() => handleHistorySelect("Today ")}>
                         Today
-                      </li>
+                      </li> */}
                       <li onClick={() => handleHistorySelect("Last month ")}>
                         Last month
                       </li>
@@ -435,7 +483,6 @@ function MainLayout() {
                     Currently Units
                     <div className={style.innerBigBox}>
                       <div className={style.rectBox}>{data.value2.value}</div>
-
                       <div className={style.rectBox}>{data.value2.value}</div>
                       <div className={style.rectBox}>{data.value3.value}</div>
                       <div className={style.rectBox}>{data.value4.value}</div>

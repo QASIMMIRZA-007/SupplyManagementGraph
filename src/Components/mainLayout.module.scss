@@ -23,15 +23,15 @@
       /* General Styles for .left */
 
       .subLeft {
-        margin-top: 30px;
+        margin-top: 10px;
 
         .box {
           width: 45%;
-          height: 15vh;
+          height: 13vh;
           // padding: 10px;
           background: #202221;
           border-radius: 10px;
-          margin: 8px ;
+          margin: 4px ;
           padding: 6px;
           display: flex;
           // justify-content: center;
@@ -43,10 +43,13 @@
 
           /* General Styles for .box */
         }
-
+.bigBoxWrapper{ 
+  display: flex;
+  gap: 9px;
+  flex-direction: column;
         .bigBox {
           width: calc(90% + 20px);
-          height: 27vh;
+          height: 22vh;
           background: #202221;
           border-radius: 10px;
           position: relative;
@@ -58,7 +61,7 @@
 
           /* General Styles for .bigBox */
 
-          .innerBigBox {
+          .innerBigBox{
             // visibility: hidden;
             display: flex;
             gap: 10px;
@@ -81,6 +84,7 @@
            
           }
         }
+      }
 
         .rectangle {
           width: 45%;
@@ -144,7 +148,7 @@
         justify-content: center;
         gap: 10px;
         flex-direction: column;
-        margin-top: 50px;
+        margin-top: 20px;
 
         /* General Styles for .innerRight */
 
