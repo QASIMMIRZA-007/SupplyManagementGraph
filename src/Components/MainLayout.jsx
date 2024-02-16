@@ -6,12 +6,12 @@ import NeedleChart4 from "./NeedleChart4";
 import BarChart from "./BarChart";
 import style from "./mainLayout.module.scss";
 
+
 // importing firebass related modules
 // import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
 import CsvDownload from "react-csv-downloader";
-import TableData from "./TableData";
-import ValuesData from "./ValuesData";
+
 
 // genetrating random data with generateRandomData.
 function generateRandomData() {
@@ -332,44 +332,42 @@ function MainLayout() {
 
               <div className={style.bigBox}>
                 <BarChart />
+             
                 <div className={style.innerBigBox}>
                   <div className={style.vlaues}>
-
                     {cities &&
                       Object.entries(cities).map(([key, value], index) => {
                         if (index === 0) {
-                          
-                        
-                        return (
-                          <table style={{ width: "100%" }}>
-                            <tr>
-                              <th>Values</th>
-                              <th>Min</th>
-                              <th>Max</th>
-                            </tr>
-                            <tr>
-                              <td>Current</td>
-                              <td>{value?.Sensor1?.Current}</td>
-                              <td>{value?.Sensor3?.Current}</td>
-                            </tr>
-                            <tr>
-                              <td>Power</td>
-                              <td>{value?.Sensor1?.Power}</td>
-                              <td>{value?.Sensor3?.Power}</td>
-                            </tr>
-                            <tr>
-                              <td>Voltage</td>
-                              <td>{value?.Sensor2?.Voltage}</td>
-                              <td>{value?.Sensor3?.Voltage}</td>
-                            </tr>
-                            <tr>
-                              <td>Frequency</td>
-                              <td>{value?.Sensor1?.Frequency}</td>
-                              <td>{value?.Sensor3?.Frequency}</td>
-                            </tr>
-                          </table>
-                        );
-                      }
+                          return (
+                            <table style={{ width: "100%" }}>
+                              <tr>
+                                <th>Values</th>
+                                <th>Min</th>
+                                <th>Max</th>
+                              </tr>
+                              <tr>
+                                <td>Current</td>
+                                <td>{value?.Sensor1?.Current}</td>
+                                <td>{value?.Sensor3?.Current}</td>
+                              </tr>
+                              <tr>
+                                <td>Power</td>
+                                <td>{value?.Sensor1?.Power}</td>
+                                <td>{value?.Sensor3?.Power}</td>
+                              </tr>
+                              <tr>
+                                <td>Voltage</td>
+                                <td>{value?.Sensor2?.Voltage}</td>
+                                <td>{value?.Sensor3?.Voltage}</td>
+                              </tr>
+                              <tr>
+                                <td>Frequency</td>
+                                <td>{value?.Sensor1?.Frequency}</td>
+                                <td>{value?.Sensor3?.Frequency}</td>
+                              </tr>
+                            </table>
+                          );
+                        }
                       })}
                   </div>
                 </div>
