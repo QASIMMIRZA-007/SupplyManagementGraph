@@ -1,22 +1,15 @@
-import { useState } from 'react'
-
-
-
-import './App.scss'
-import MainLayout from './Components/MainLayout'
+import { useState } from "react";
+import "./App.scss";
+import MainLayout from "./Components/MainLayout";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [count, setCount] = useState(0);
 
   return (
-  <>
-
-
-<MainLayout/>
-   
-
-  </>
-  )
+    <>
+      <MainLayout />
+    </>
+  );
 }
 
-export default App
+export default App;

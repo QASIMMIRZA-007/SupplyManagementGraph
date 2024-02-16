@@ -10,6 +10,8 @@ import style from "./mainLayout.module.scss";
 // import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
 import CsvDownload from "react-csv-downloader";
+import TableData from "./TableData";
+import ValuesData from "./ValuesData";
 
 // genetrating random data with generateRandomData.
 function generateRandomData() {
@@ -59,9 +61,6 @@ function MainLayout() {
     setSelectedHistory(option);
     setHistory(false);
   };
- 
- 
-
 
   useEffect(() => {
     setData(generateRandomData());
@@ -92,7 +91,6 @@ function MainLayout() {
       return null;
     }
   }
- 
 
   // Use case the async function
   (async () => {
@@ -104,141 +102,131 @@ function MainLayout() {
     }
   })();
 
- 
-
   useEffect(() => {
     getCities()
       .then((data) => setCities(data))
       .catch((error) => console.error("Error:", error));
   }, []);
-  
-const citiesToDownload =[];
-Object.entries(cities).forEach(([key, value]) => {
-  console.log(key, value);
 
-  const temp={
-    Enviornment_Humidity:value?.Enviornment?.Humidity,
-    Enviornment_Temperature:value?.Enviornment?.Temperature,
-    // Sensor1_Current:value?.Sensor1?.Current,
-    Sensor1_Energy:value?.Sensor1?.Energy,
-    Sensor1_Power:value?.Sensor1?.Power,
-    // Sensor1_Frequency:value?.Sensor1?.Frequency,
-    Sensor1_PowerFactor:value?.Sensor1?.PowerFactor,
+  const citiesToDownload = [];
+  Object.entries(cities).forEach(([key, value]) => {
+    console.log(key, value);
 
+    const temp = {
+      Enviornment_Humidity: value?.Enviornment?.Humidity,
+      Enviornment_Temperature: value?.Enviornment?.Temperature,
+      // Sensor1_Current:value?.Sensor1?.Current,
+      Sensor1_Energy: value?.Sensor1?.Energy,
+      Sensor1_Power: value?.Sensor1?.Power,
+      // Sensor1_Frequency:value?.Sensor1?.Frequency,
+      Sensor1_PowerFactor: value?.Sensor1?.PowerFactor,
 
-    // Sensor2_Current:value?.Sensor2?.Current,
-    Sensor2_Energy:value?.Sensor2?.Energy,
-    Sensor2_Power:value?.Sensor2?.Power,
-    // Sensor2_Frequecy:value?.Sensor2?.Frequency,
-    Sensor2_PowerFactor:value?.Sensor2?.PowerFactor,
-    // Sensor3_Current:value?.Sensor3?.Current,
-    Sensor3_Energy:value?.Sensor3?.Energy,
-    Sensor3_Power:value?.Sensor3?.Power,
-    // Sensor3_Frequecy:value?.Sensor3?.Frequency,
-    Sensor3_PowerFactor:value?.Sensor3?.PowerFactor,
-   
-  };
+      // Sensor2_Current:value?.Sensor2?.Current,
+      Sensor2_Energy: value?.Sensor2?.Energy,
+      Sensor2_Power: value?.Sensor2?.Power,
+      // Sensor2_Frequecy:value?.Sensor2?.Frequency,
+      Sensor2_PowerFactor: value?.Sensor2?.PowerFactor,
+      // Sensor3_Current:value?.Sensor3?.Current,
+      Sensor3_Energy: value?.Sensor3?.Energy,
+      Sensor3_Power: value?.Sensor3?.Power,
+      // Sensor3_Frequecy:value?.Sensor3?.Frequency,
+      Sensor3_PowerFactor: value?.Sensor3?.PowerFactor,
+    };
 
-  citiesToDownload.push(temp)
-});
+    citiesToDownload.push(temp);
+  });
 
-console.log(citiesToDownload, 'cities to donload')
+  console.log(citiesToDownload, "cities to donload");
 
-const columns = [
-  {
-    id: 'Enviornment_Humidity',
-    displayName: 'Humidity',
-  },
-  {
-    id: 'Enviornment_Temperature',
-    displayName: 'Temperature',
-  },
-  // {
-  //   id: 'Sensor1_Current',
-  //   displayName: 'Sensor1 Current',
-  // },
-  {
-    id: 'Sensor1_Energy',
-    displayName: 'Sensor1 Energy',
-  },
-  // {
-  //   id: 'Sensor1_Frequency',
-  //   displayName: 'Sensor1 Frequency',
-  // },
-  {
-    id: 'Sensor1_Power',
-    displayName: 'Sensor1 Power',
-  },
-  {
-    id: 'Sensor1_PowerFactor',
-    displayName: 'Sensor1 PowerFactor',
-  },
-  // {
-  //   id: 'Sensor1_Voltage',
-  //   displayName: 'Sensor1 Voltage',
-  // },
-  // {
-  //   id: 'Sensor2_Current',
-  //   displayName: 'Sensor2 Current',
-  // },
-  {
-    id: 'Sensor2_Energy',
-    displayName: 'Sensor2 Energy',
-  },
-  // {
-  //   id: 'Sensor2_Frequency',
-  //   displayName: 'Sensor2 Frequency',
-  // },
-  {
-    id: 'Sensor2_Power',
-    displayName: 'Sensor2 Power',
-  },
-  {
-    id: 'Sensor2_PowerFactor',
-    displayName: 'Sensor2 PowerFactor',
-  },
-  // {
-  //   id: 'Sensor2_Voltage',
-  //   displayName: 'Sensor2 Voltage',
-  // },
-  // {
-  //   id: 'Sensor3_Current',
-  //   displayName: 'Sensor3 Current',
-  // },
-  {
-    id: 'Sensor3_Energy',
-    displayName: 'Sensor3 Energy',
-  },
-  // {
-  //   id: 'Sensor3_Frequency',
-  //   displayName: 'Sensor3 Frequency',
-  // },
-  {
-    id: 'Sensor3_Power',
-    displayName: 'Sensor3 Power',
-  },
-  {
-    id: 'Sensor3_PowerFactor',
-    displayName: 'Sensor3 PowerFactor',
-  },
-  // {
-  //   id: 'Sensor3_Voltage',
-  //   displayName: 'Sensor3 Voltage',
-  // },
-];
-
-
-
+  const columns = [
+    {
+      id: "Enviornment_Humidity",
+      displayName: "Humidity",
+    },
+    {
+      id: "Enviornment_Temperature",
+      displayName: "Temperature",
+    },
+    // {
+    //   id: 'Sensor1_Current',
+    //   displayName: 'Sensor1 Current',
+    // },
+    {
+      id: "Sensor1_Energy",
+      displayName: "Sensor1 Energy",
+    },
+    // {
+    //   id: 'Sensor1_Frequency',
+    //   displayName: 'Sensor1 Frequency',
+    // },
+    {
+      id: "Sensor1_Power",
+      displayName: "Sensor1 Power",
+    },
+    {
+      id: "Sensor1_PowerFactor",
+      displayName: "Sensor1 PowerFactor",
+    },
+    // {
+    //   id: 'Sensor1_Voltage',
+    //   displayName: 'Sensor1 Voltage',
+    // },
+    // {
+    //   id: 'Sensor2_Current',
+    //   displayName: 'Sensor2 Current',
+    // },
+    {
+      id: "Sensor2_Energy",
+      displayName: "Sensor2 Energy",
+    },
+    // {
+    //   id: 'Sensor2_Frequency',
+    //   displayName: 'Sensor2 Frequency',
+    // },
+    {
+      id: "Sensor2_Power",
+      displayName: "Sensor2 Power",
+    },
+    {
+      id: "Sensor2_PowerFactor",
+      displayName: "Sensor2 PowerFactor",
+    },
+    // {
+    //   id: 'Sensor2_Voltage',
+    //   displayName: 'Sensor2 Voltage',
+    // },
+    // {
+    //   id: 'Sensor3_Current',
+    //   displayName: 'Sensor3 Current',
+    // },
+    {
+      id: "Sensor3_Energy",
+      displayName: "Sensor3 Energy",
+    },
+    // {
+    //   id: 'Sensor3_Frequency',
+    //   displayName: 'Sensor3 Frequency',
+    // },
+    {
+      id: "Sensor3_Power",
+      displayName: "Sensor3 Power",
+    },
+    {
+      id: "Sensor3_PowerFactor",
+      displayName: "Sensor3 PowerFactor",
+    },
+    // {
+    //   id: 'Sensor3_Voltage',
+    //   displayName: 'Sensor3 Voltage',
+    // },
+  ];
 
   return (
     <>
       <div className={style.mainLayout}>
         <div className={style.layout}>
-          
           <div className={style.left}>
-          
             <div className={style.subLeft}>
-           
               <div className="flex al a jc">
                 {cities &&
                   Object.entries(cities).map(([key, value], index) => {
@@ -248,12 +236,11 @@ const columns = [
                         <div key={key} className={style.box}>
                           Current
                           <div className="d-flex al-c jc-sp">
-                          
-                          <div>A</div>
+                            <div>A</div>
                             <div>B</div>
                             <div>C</div>
-                            </div>
-                            <div className="d-flex al-c jc-sp">
+                          </div>
+                          <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Current}</div>
                             <div>{value?.Sensor2?.Current}</div>
                             <div>{value?.Sensor3?.Current}</div>
@@ -274,11 +261,11 @@ const columns = [
                         <div key={key} className={style.box}>
                           Power
                           <div className="d-flex al-c jc-sp">
-                          <div>A</div>
+                            <div>A</div>
                             <div>B</div>
                             <div>C</div>
-                            </div>
-                            <div className="d-flex al-c jc-sp">
+                          </div>
+                          <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Power}</div>
                             <div>{value?.Sensor2?.Power}</div>
                             <div>{value?.Sensor3?.Power}</div>
@@ -301,12 +288,11 @@ const columns = [
                         <div key={key} className={style.box}>
                           Voltage
                           <div className="d-flex al-c jc-sp ">
-                         
-                          <div>A</div>
+                            <div>A</div>
                             <div>B</div>
                             <div>C</div>
-                            </div>
-                            <div className="d-flex al-c jc-sp">
+                          </div>
+                          <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Voltage}</div>
                             <div>{value?.Sensor2?.Voltage}</div>
                             <div>{value?.Sensor3?.Voltage}</div>
@@ -323,15 +309,14 @@ const columns = [
                     if (index === 0) {
                       // Process only the first object
                       return (
-                        <div key={key} className= {`${style.box} margin `} >
+                        <div key={key} className={`${style.box} margin `}>
                           Frequency
                           <div className="d-flex al-c jc-sp">
-                         <div>A</div>
-                           <div>B</div>
-                           <div>C</div>
-                           </div>
-                           <div className="d-flex al-c jc-sp">
-                            
+                            <div>A</div>
+                            <div>B</div>
+                            <div>C</div>
+                          </div>
+                          <div className="d-flex al-c jc-sp">
                             <div>{value?.Sensor1?.Frequency}</div>
                             <div>{value?.Sensor2?.Frequency}</div>
                             <div>{value?.Sensor3?.Frequency}</div>
@@ -348,22 +333,48 @@ const columns = [
               <div className={style.bigBox}>
                 <BarChart />
                 <div className={style.innerBigBox}>
-                  {/* <div className={style.rectBox}>
-                    {data.value1.value} {data.value1.unit}
-                  </div> */}
-                  
-                  {/* <div className={style.rectBox}>
-                    {data.value2.value} {data.value2.unit}
+                  <div className={style.vlaues}>
+
+                    {cities &&
+                      Object.entries(cities).map(([key, value], index) => {
+                        if (index === 0) {
+                          
+                        
+                        return (
+                          <table style={{ width: "100%" }}>
+                            <tr>
+                              <th>Values</th>
+                              <th>Min</th>
+                              <th>Max</th>
+                            </tr>
+                            <tr>
+                              <td>Current</td>
+                              <td>{value?.Sensor1?.Current}</td>
+                              <td>{value?.Sensor3?.Current}</td>
+                            </tr>
+                            <tr>
+                              <td>Power</td>
+                              <td>{value?.Sensor1?.Power}</td>
+                              <td>{value?.Sensor3?.Power}</td>
+                            </tr>
+                            <tr>
+                              <td>Voltage</td>
+                              <td>{value?.Sensor2?.Voltage}</td>
+                              <td>{value?.Sensor3?.Voltage}</td>
+                            </tr>
+                            <tr>
+                              <td>Frequency</td>
+                              <td>{value?.Sensor1?.Frequency}</td>
+                              <td>{value?.Sensor3?.Frequency}</td>
+                            </tr>
+                          </table>
+                        );
+                      }
+                      })}
                   </div>
-                  <div className={style.rectBox}>
-                    {data.value3.value} {data.value3.unit}
-                  </div>
-                  <div className={style.rectBox}>
-                    {data.value4.value} {data.value4.unit}
-                  </div> */}
                 </div>
               </div>
-             
+
               <div className="flexx al  jc">
                 <div className={style.rectangle}>
                   <div className={style.innerRect}>
@@ -402,22 +413,23 @@ const columns = [
                       <IoIosArrowDropdown onClick={toggleHistory} />{" "}
                     </span>
                   </div>
-                  
-                  
                 </div>
-                
               </div>
             </div>
           </div>
-          
+
           <div className={style.right}>
             <div className={style.innerRight}>
-         
-            <div className="downloadData">
-            <CsvDownload text="Download" datas={citiesToDownload} columns={columns}  filename="myfile"
-        extension=".csv" />
+              <div className="downloadData">
+                <CsvDownload
+                  text="Download"
+                  datas={citiesToDownload}
+                  columns={columns}
+                  filename="myfile"
+                  extension=".csv"
+                />
               </div>
-           
+
               <div className={`   ${style.box} smBox `}>
                 <form className={style.form}>
                   <label>
@@ -443,7 +455,6 @@ const columns = [
               </div>
             </div>
           </div>
-          
         </div>
       </div>
     </>
