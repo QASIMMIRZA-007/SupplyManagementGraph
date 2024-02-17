@@ -496,7 +496,9 @@ function MainLayout() {
                   </div>
                 </div>
               </div>
+              
               <div className={style.bigBox}>
+              <h3 style={{color:"#fff"}}>Min&max values chart</h3>
              <CustomLineChart  lineChatData={lineChartData}/>
                
                 

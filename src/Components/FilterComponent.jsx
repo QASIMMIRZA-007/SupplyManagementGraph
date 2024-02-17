@@ -10,6 +10,12 @@ const FilterComponent = ({ selectedHistory, handleHistorySelect, history, toggle
         {selectedHistory}
         <ul style={{ display: history ? 'block' : 'none' }}>
           <li onClick={() => handleHistorySelect('Last  7 days')}>
+            Monday
+          </li>
+          <li onClick={() => handleHistorySelect('Last month')}>
+            Tuesday
+          </li>
+          <li onClick={() => handleHistorySelect('Last  7 days')}>
             Last 7 days
           </li>
           <li onClick={() => handleHistorySelect('Last month')}>
