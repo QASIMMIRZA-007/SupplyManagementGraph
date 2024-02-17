@@ -12,6 +12,7 @@ import { db } from "../firebaseConfig";
 import CsvDownload from "react-csv-downloader";
 import CustomBarChart from "./CustomBarChart";
 import CustomLineChart from "./CustomLineChart";
+import FilterComponent from "./FilterComponent";
 
 
 // genetrating random data with generateRandomData.
@@ -44,7 +45,130 @@ function MainLayout() {
   const [selectedHistory, setSelectedHistory] = useState("Last 7 days");
   const [data, setData] = useState(generateRandomData());
   const [cities, setCities] = useState([]);
+  const [lineChartData, setLineChartData] = useState([
+    {
+      uv: 7000,
+      pv: 6400,
+      amt: 2400,
+      vol: 3900,
+      name: 'A',
+    },
+    {
+      uv: 7000,
+      pv: 9998,
+      amt: 2210,
+      vol: 2900,
+      name: 'B',
+    },
+    {
+      uv: 5000,
+      pv: 9800,
+      amt: 4290,
+      vol: 4900,
+      name: 'C',
+    },
+    {
+      uv: 8980,
+      pv: 7908,
+      amt: 2000,
+      vol: 5900,
+      name: 'D',
+    },
+    {
+      uv: 9890,
+      pv: 2800,
+      amt: 2181,
+      vol: 1900,
+      name: 'E',
+    },
+    {
+      uv: 5390,
+      pv: 9800,
+      amt: 3500,
+      vol: 6900,
+      name: 'F',
+    },
+    {
+      uv: 8980,
+      pv: 6908,
+      amt: 2000,
+      vol: 3900,
+      name: 'G',
+    },
+  ]);
 
+ 
+
+  const handleHistorySelect = (option) => {
+    setSelectedHistory(option);
+    setHistory(false);
+    // Here you can add logic to fetch data based on the selected history
+    // and update lineChartData accordingly
+    // For now, I'll just update some dummy data
+    const newData = lineChartData.map((item) => ({
+      ...item,
+      uv: item.uv * Math.random() * 2, // Just a dummy update for demonstration
+    
+    }));
+    setLineChartData(newData);
+  };
+  
+
+
+  // const lineChartData  = [
+  //   {
+  //     uv: 7000,
+  //     pv: 6400,
+  //     amt: 2400,
+  //     vol:3900,
+  //     name: 'A',
+  //   },
+  //   {
+  //     uv: 7000,
+  //     pv: 9998,
+  //     amt: 2210,
+  //     vol:2900,
+  //     name: 'B',
+  //   },
+  //   {
+  //     uv: 5000,
+  //     pv: 9800,
+  //     amt: 4290,
+  //     vol:4900,
+  //     name: 'C',
+  //   },
+  //   {
+  //     uv: 8980,
+  //     pv: 7908,
+  //     amt: 2000,
+  //     vol:5900,
+  //     name: 'D',
+  //   },
+  //   {
+  //     uv: 9890,
+  //     pv: 2800,
+  //     amt: 2181,
+  //     vol:1900,
+  //     name: 'E',
+  //   },
+  //   {
+  //     uv: 5390,
+  //     pv: 9800,
+  //     amt: 3500,
+  //     vol:6900,
+  //     name: 'F',
+  //   },
+  //   {
+  //     uv: 8980,
+  //     pv: 6908,
+  //     amt: 2000,
+  //     vol:3900,
+  //     name: 'G',
+  //   },
+  // ];
+
+
+ 
   const toggleListVisibility = () => {
     setListVisibility(!isListVisible);
   };
@@ -58,10 +182,7 @@ function MainLayout() {
     setListVisibility(false);
   };
 
-  const handleHistorySelect = (option) => {
-    setSelectedHistory(option);
-    setHistory(false);
-  };
+ 
 
   useEffect(() => {
     setData(generateRandomData());
@@ -336,7 +457,7 @@ function MainLayout() {
                
                 
              
-                <div className={style.innerBigBox} style={{visibility:"hidden"}}>
+                <div className={style.innerBigBox} >
                   <div className={style.vlaues}>
                     {cities &&
                       Object.entries(cities).map(([key, value], index) => {
@@ -376,11 +497,11 @@ function MainLayout() {
                 </div>
               </div>
               <div className={style.bigBox}>
-             <CustomLineChart />
+             <CustomLineChart  lineChatData={lineChartData}/>
                
                 
              
-                <div className={style.innerBigBox}>
+                <div className={style.innerBigBox} >
                   <div className={style.vlaues}>
                     {cities &&
                       Object.entries(cities).map(([key, value], index) => {
@@ -440,16 +561,22 @@ function MainLayout() {
                     </span>
                   </div>
                 </div>
-                <div className={style.rectangle}>
-                  <div className={style.innerRect}>
+                
+                <FilterComponent
+        selectedHistory={selectedHistory}
+        handleHistorySelect={handleHistorySelect}
+        history={history}
+        toggleHistory={toggleHistory}
+      />
+                  {/* <div className={style.innerRect}>
                     {selectedHistory}
                     <ul style={{ display: history ? "block" : "none" }}>
                       <li onClick={() => handleHistorySelect("Last  7 days ")}>
                         Last 7 days
                       </li>
-                      {/* <li onClick={() => handleHistorySelect("Today ")}>
+                      <li onClick={() => handleHistorySelect("Today ")}>
                         Today
-                      </li> */}
+                      </li>
                       <li onClick={() => handleHistorySelect("Last month ")}>
                         Last month
                       </li>
@@ -458,8 +585,8 @@ function MainLayout() {
                       {" "}
                       <IoIosArrowDropdown onClick={toggleHistory} />{" "}
                     </span>
-                  </div>
-                </div>
+                  </div> */}
+                
               </div>
             </div>
           </div>

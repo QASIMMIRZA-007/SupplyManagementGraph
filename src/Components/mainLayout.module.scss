@@ -62,9 +62,12 @@
           /* General Styles for .bigBox */
 
           .innerBigBox{
-            // visibility: hidden;
+            visibility: hidden;
             display: flex;
             gap: 10px;
+            @media screen and (max-width:768px) {
+              display: none;
+            }
             table{
               width: 90%;
               background: #fff;
@@ -199,6 +202,7 @@
       flex-direction: column;
       // height: 170vh;
 height: auto;
+background: #000;
       .layout {
         height: auto;
       }
