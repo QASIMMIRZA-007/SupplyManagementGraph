@@ -9,18 +9,16 @@ const FilterComponent = ({ selectedHistory, handleHistorySelect, history, toggle
       <div className={style.innerRect}>
         {selectedHistory}
         <ul style={{ display: history ? 'block' : 'none' }}>
-          <li onClick={() => handleHistorySelect('Last  7 days')}>
-            Monday
+          <li onClick={() => handleHistorySelect('Last week')}>
+          Last week
           </li>
           <li onClick={() => handleHistorySelect('Last month')}>
-            Tuesday
+          Last month
           </li>
-          <li onClick={() => handleHistorySelect('Last  7 days')}>
-            Last 7 days
+          <li onClick={() => handleHistorySelect('Last year')}>
+          Last year
           </li>
-          <li onClick={() => handleHistorySelect('Last month')}>
-            Last month
-          </li>
+        
         </ul>
         <span>
           <IoIosArrowDropdown onClick={toggleHistory} />

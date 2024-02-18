@@ -13,6 +13,7 @@ import CsvDownload from "react-csv-downloader";
 import CustomBarChart from "./CustomBarChart";
 import CustomLineChart from "./CustomLineChart";
 import FilterComponent from "./FilterComponent";
+import New from "./New";
 
 
 // genetrating random data with generateRandomData.
@@ -42,131 +43,157 @@ function MainLayout() {
   const [isListVisible, setListVisibility] = useState(false);
   const [history, setHistory] = useState(false);
   const [selectedOption, setSelectedOption] = useState("Voltage");
-  const [selectedHistory, setSelectedHistory] = useState("Last 7 days");
+  const [selectedHistory, setSelectedHistory] = useState("Last week");
   const [data, setData] = useState(generateRandomData());
   const [cities, setCities] = useState([]);
-  const [lineChartData, setLineChartData] = useState([
-    {
-      uv: 7000,
-      pv: 6400,
-      amt: 2400,
-      vol: 3900,
-      name: 'A',
-    },
-    {
-      uv: 7000,
-      pv: 9998,
-      amt: 2210,
-      vol: 2900,
-      name: 'B',
-    },
-    {
-      uv: 5000,
-      pv: 9800,
-      amt: 4290,
-      vol: 4900,
-      name: 'C',
-    },
-    {
-      uv: 8980,
-      pv: 7908,
-      amt: 2000,
-      vol: 5900,
-      name: 'D',
-    },
-    {
-      uv: 9890,
-      pv: 2800,
-      amt: 2181,
-      vol: 1900,
-      name: 'E',
-    },
-    {
-      uv: 5390,
-      pv: 9800,
-      amt: 3500,
-      vol: 6900,
-      name: 'F',
-    },
-    {
-      uv: 8980,
-      pv: 6908,
-      amt: 2000,
-      vol: 3900,
-      name: 'G',
-    },
-  ]);
-
  
 
+    const [lineChartData, setLineChartData] = useState([
+      {
+        name: 'Monday',
+        pv:5003,
+        curr: 3900,
+        vol: 7000,
+        freq: 6400,
+        pow: 10000,
+       
+      },
+      {
+        name: 'Tuesday',
+        
+        curr: 2900,
+        vol: 7000,
+        freq: 9998,
+        pow: 2210,
+        
+      },
+      {
+        name: 'Wednesday', 
+            
+        curr: 4900,
+        vol: 5000,
+        freq: 9800,
+        pow: 4290,
+      
+      },
+      {
+        name: 'Thursday',
+        
+        curr: 5900,
+        vol: 8980,
+        freq: 7908,
+        pow: 2000,
+        
+      },
+      {
+        name: 'Friday',
+        
+        curr: 1900,
+        vol: 9890,
+        freq: 2800,
+        pow: 2181,
+      
+      },
+      {
+        name: 'Saturday',
+        
+        curr: 6900,
+        vol: 5390,
+        freq: 9800,
+        pow: 3500,
+      },
+      {
+       
+        name: 'Sunday',
+        curr: 3900,
+        vol: 8980,
+        freq: 6908,
+        pow: 2000,
+       
+      },
+    ]);
+  
+
+
+
+
+  
   const handleHistorySelect = (option) => {
     setSelectedHistory(option);
     setHistory(false);
-    // Here you can add logic to fetch data based on the selected history
-    // and update lineChartData accordingly
-    // For now, I'll just update some dummy data
-    const newData = lineChartData.map((item) => ({
-      ...item,
-      uv: item.uv * Math.random() * 2, // Just a dummy update for demonstration
-    
-    }));
+  
+    // Logic to generate new lineChartData based on the selected history
+    let newData = [];
+  
+    switch (option) {
+      case 'Last week':
+        newData = generateChartDataForDays(7);
+        break;
+      case 'Last month':
+        newData = generateChartDataForWeeks(4); // 4 weeks in a month
+        break;
+      case 'Last year':
+        newData = generateChartDataForMonths(12);
+        break;
+      default:
+        newData = lineChartData;
+        break;
+    }
+  
     setLineChartData(newData);
+  };
+  
+  // Function to generate chart data for a given number of days
+  const generateChartDataForDays = (numDays) => {
+    const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+    const today = new Date();
+    const newData = Array.from({ length: numDays }, (_, index) => {
+      const dayIndex = (today.getDay() + 6 - index) % 7; // Calculate the day index based on today
+      return {
+        curr: Math.floor(Math.random() * 10000),
+        vol: Math.floor(Math.random() * 10000),
+        freq: Math.floor(Math.random() * 5000),
+        pow: Math.floor(Math.random() * 5000),
+        name: days[dayIndex],
+      };
+    });
+    return newData.reverse(); // Reverse the array to have data in chronological order
+  };
+  
+  // Function to generate chart data for a given number of weeks (assuming 4 weeks in a month)
+  const generateChartDataForWeeks = (numWeeks) => {
+    const weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    const newData = Array.from({ length: numWeeks }, (_, index) => ({
+      curr: Math.floor(Math.random() * 10000),
+      pv: Math.floor(Math.random() * 10000),
+      vol: Math.floor(Math.random() * 10000),
+      frq: Math.floor(Math.random() * 5000),
+      pow: Math.floor(Math.random() * 5000),
+      name: weeks[index],
+    }));
+    return newData;
+  };
+  
+  // Function to generate chart data for a given number of months
+
+  const generateChartDataForMonths = () => {
+    const months = [
+      'Jan', 'Feb', 'March', 'April', 'May', 'June',
+      'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+    ];
+    const newData = months.map(month => ({
+      curr: Math.floor(Math.random() * 10000),
+      vol: Math.floor(Math.random() * 10000),
+      freq: Math.floor(Math.random() * 5000),
+      pow: Math.floor(Math.random() * 5000),
+      name: month,
+    }));
+    return newData;
   };
   
 
 
-  // const lineChartData  = [
-  //   {
-  //     uv: 7000,
-  //     pv: 6400,
-  //     amt: 2400,
-  //     vol:3900,
-  //     name: 'A',
-  //   },
-  //   {
-  //     uv: 7000,
-  //     pv: 9998,
-  //     amt: 2210,
-  //     vol:2900,
-  //     name: 'B',
-  //   },
-  //   {
-  //     uv: 5000,
-  //     pv: 9800,
-  //     amt: 4290,
-  //     vol:4900,
-  //     name: 'C',
-  //   },
-  //   {
-  //     uv: 8980,
-  //     pv: 7908,
-  //     amt: 2000,
-  //     vol:5900,
-  //     name: 'D',
-  //   },
-  //   {
-  //     uv: 9890,
-  //     pv: 2800,
-  //     amt: 2181,
-  //     vol:1900,
-  //     name: 'E',
-  //   },
-  //   {
-  //     uv: 5390,
-  //     pv: 9800,
-  //     amt: 3500,
-  //     vol:6900,
-  //     name: 'F',
-  //   },
-  //   {
-  //     uv: 8980,
-  //     pv: 6908,
-  //     amt: 2000,
-  //     vol:3900,
-  //     name: 'G',
-  //   },
-  // ];
-
+  
 
  
   const toggleListVisibility = () => {
@@ -452,7 +479,7 @@ function MainLayout() {
                   })}
               </div>
 <div className={style.bigBoxWrapper}> 
-              <div className={style.bigBox}>
+              {/* <div className={style.bigBox}>
                <CustomBarChart />
                
                 
@@ -495,11 +522,12 @@ function MainLayout() {
                       })}
                   </div>
                 </div>
-              </div>
+              </div> */}
               
               <div className={style.bigBox}>
               <h3 style={{color:"#fff"}}>Min&max values chart</h3>
              <CustomLineChart  lineChatData={lineChartData}/>
+           
                
                 
              
@@ -552,7 +580,7 @@ function MainLayout() {
                       <li onClick={() => handleOptionSelect("Current")}>
                         Current
                       </li>
-                      {/* <li onClick={() => handleOptionSelect("Power")}>Power</li> */}
+                      <li onClick={() => handleOptionSelect("Power")}>Power</li>
                       <li onClick={() => handleOptionSelect("Frequency")}>
                         Frequency
                       </li>
