@@ -5,7 +5,6 @@ import NeedleChart2 from "./NeedleChart2";
 import NeedleChart4 from "./NeedleChart4";
 import style from "./mainLayout.module.scss";
 
-
 // importing firebass related modules
 // import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../firebaseConfig";
@@ -14,7 +13,6 @@ import CustomBarChart from "./CustomBarChart";
 import CustomLineChart from "./CustomLineChart";
 import FilterComponent from "./FilterComponent";
 import New from "./New";
-
 
 // genetrating random data with generateRandomData.
 function generateRandomData() {
@@ -41,111 +39,100 @@ function generateRandomData() {
 function MainLayout() {
   // state of the component
   const [isListVisible, setListVisibility] = useState(false);
+  const [isListVisible2, setListVisibility2] = useState(false);
   const [history, setHistory] = useState(false);
-  const [selectedOption, setSelectedOption] = useState("Voltage");
   const [selectedHistory, setSelectedHistory] = useState("Last week");
   const [data, setData] = useState(generateRandomData());
   const [cities, setCities] = useState([]);
- 
+  const [selectedOption, setSelectedOption] = useState("All");
+  // const [lineChartData, setLineChartData] = useState([]);
 
-    const [lineChartData, setLineChartData] = useState([
-      {
-        name: 'Monday',
-        pv:5003,
-        curr: 3900,
-        vol: 7000,
-        freq: 6400,
-        pow: 10000,
-       
-      },
-      {
-        name: 'Tuesday',
-        
-        curr: 2900,
-        vol: 7000,
-        freq: 9998,
-        pow: 2210,
-        
-      },
-      {
-        name: 'Wednesday', 
-            
-        curr: 4900,
-        vol: 5000,
-        freq: 9800,
-        pow: 4290,
-      
-      },
-      {
-        name: 'Thursday',
-        
-        curr: 5900,
-        vol: 8980,
-        freq: 7908,
-        pow: 2000,
-        
-      },
-      {
-        name: 'Friday',
-        
-        curr: 1900,
-        vol: 9890,
-        freq: 2800,
-        pow: 2181,
-      
-      },
-      {
-        name: 'Saturday',
-        
-        curr: 6900,
-        vol: 5390,
-        freq: 9800,
-        pow: 3500,
-      },
-      {
-       
-        name: 'Sunday',
-        curr: 3900,
-        vol: 8980,
-        freq: 6908,
-        pow: 2000,
-       
-      },
-    ]);
-  
+  const [lineChartData, setLineChartData] = useState([
+    {
+      name: "Monday",
+      pv: 5003,
+      curr: 3900,
+      vol: 7000,
+      freq: 6400,
+      pow: 10000,
+    },
+    {
+      name: "Tuesday",
 
+      curr: 2900,
+      vol: 7000,
+      freq: 9998,
+      pow: 2210,
+    },
+    {
+      name: "Wednesday",
 
+      curr: 4900,
+      vol: 5000,
+      freq: 9800,
+      pow: 4290,
+    },
+    {
+      name: "Thursday",
 
+      curr: 5900,
+      vol: 8980,
+      freq: 7908,
+      pow: 2000,
+    },
+    {
+      name: "Friday",
 
-  
+      curr: 1900,
+      vol: 9890,
+      freq: 2800,
+      pow: 2181,
+    },
+    {
+      name: "Saturday",
+
+      curr: 6900,
+      vol: 5390,
+      freq: 9800,
+      pow: 3500,
+    },
+    {
+      name: "Sunday",
+      curr: 3900,
+      vol: 8980,
+      freq: 6908,
+      pow: 2000,
+    },
+  ]);
+
   const handleHistorySelect = (option) => {
     setSelectedHistory(option);
     setHistory(false);
-  
+
     // Logic to generate new lineChartData based on the selected history
     let newData = [];
-  
+
     switch (option) {
-      case 'Last week':
+      case "Last week":
         newData = generateChartDataForDays(7);
         break;
-      case 'Last month':
+      case "Last month":
         newData = generateChartDataForWeeks(4); // 4 weeks in a month
         break;
-      case 'Last year':
+      case "Last year":
         newData = generateChartDataForMonths(12);
         break;
       default:
         newData = lineChartData;
         break;
     }
-  
+
     setLineChartData(newData);
   };
-  
+
   // Function to generate chart data for a given number of days
   const generateChartDataForDays = (numDays) => {
-    const days = ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'];
+    const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
     const today = new Date();
     const newData = Array.from({ length: numDays }, (_, index) => {
       const dayIndex = (today.getDay() + 6 - index) % 7; // Calculate the day index based on today
@@ -159,10 +146,10 @@ function MainLayout() {
     });
     return newData.reverse(); // Reverse the array to have data in chronological order
   };
-  
+
   // Function to generate chart data for a given number of weeks (assuming 4 weeks in a month)
   const generateChartDataForWeeks = (numWeeks) => {
-    const weeks = ['Week 1', 'Week 2', 'Week 3', 'Week 4'];
+    const weeks = ["Week 1", "Week 2", "Week 3", "Week 4"];
     const newData = Array.from({ length: numWeeks }, (_, index) => ({
       curr: Math.floor(Math.random() * 10000),
       pv: Math.floor(Math.random() * 10000),
@@ -173,15 +160,25 @@ function MainLayout() {
     }));
     return newData;
   };
-  
+
   // Function to generate chart data for a given number of months
 
   const generateChartDataForMonths = () => {
     const months = [
-      'Jan', 'Feb', 'March', 'April', 'May', 'June',
-      'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'
+      "Jan",
+      "Feb",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
-    const newData = months.map(month => ({
+    const newData = months.map((month) => ({
       curr: Math.floor(Math.random() * 10000),
       vol: Math.floor(Math.random() * 10000),
       freq: Math.floor(Math.random() * 5000),
@@ -190,26 +187,33 @@ function MainLayout() {
     }));
     return newData;
   };
-  
 
+  // const toggleListVisibility = () => {
+  //   setListVisibility(!isListVisible );
+  //   // setListVisibility2(!isListVisible2);
+  // };
 
-  
-
- 
+  // const toggleHistory = () => {
+  //  setHistory(!history)
+  // };
   const toggleListVisibility = () => {
     setListVisibility(!isListVisible);
+    setListVisibility2(false); // Close the second rectangle when the first one is clicked
+  };
+  const toggleListVisibility2 = () => {
+    setListVisibility2(!isListVisible2);
+    setListVisibility(false); // Close the second rectangle when the first one is clicked
   };
 
-  const toggleHistory = () => {
-    setHistory(!history);
-  };
+  // const toggleHistory = () => {
+  //   setHistory(!history);
+  //   setListVisibility2(false); // Close the second rectangle when the first one is clicked
+  // };
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     setListVisibility(false);
   };
-
- 
 
   useEffect(() => {
     setData(generateRandomData());
@@ -478,145 +482,128 @@ function MainLayout() {
                     }
                   })}
               </div>
-<div className={style.bigBoxWrapper}> 
-              {/* <div className={style.bigBox}>
-               <CustomBarChart />
-               
-                
-             
-                <div className={style.innerBigBox} >
-                  <div className={style.vlaues}>
-                    {cities &&
-                      Object.entries(cities).map(([key, value], index) => {
-                        if (index === 0) {
-                          return (
-                            <table style={{ width: "100%" }}>
-                              <tr>
-                                <th>Values</th>
-                                <th>Min</th>
-                                <th>Max</th>
-                              </tr>
-                              <tr>
-                                <td>Current</td>
-                                <td>{value?.Sensor1?.Current}</td>
-                                <td>{value?.Sensor3?.Current}</td>
-                              </tr>
-                              <tr>
-                                <td>Power</td>
-                                <td>{value?.Sensor1?.Power}</td>
-                                <td>{value?.Sensor3?.Power}</td>
-                              </tr>
-                              <tr>
-                                <td>Voltage</td>
-                                <td>{value?.Sensor2?.Voltage}</td>
-                                <td>{value?.Sensor3?.Voltage}</td>
-                              </tr>
-                              <tr>
-                                <td>Frequency</td>
-                                <td>{value?.Sensor1?.Frequency}</td>
-                                <td>{value?.Sensor3?.Frequency}</td>
-                              </tr>
-                            </table>
-                          );
-                        }
-                      })}
-                  </div>
-                </div>
-              </div> */}
-              
-              <div className={style.bigBox}>
-              <h3 style={{color:"#fff"}}> values chart</h3>
-             <CustomLineChart  lineChatData={lineChartData}/>
-           
-               
-                
-             
-                <div className={style.innerBigBox} >
-                  <div className={style.vlaues}>
-                    {cities &&
-                      Object.entries(cities).map(([key, value], index) => {
-                        if (index === 0) {
-                          return (
-                            <table style={{ width: "100%" }}>
-                              <tr>
-                                <th>Values</th>
-                                <th>Min</th>
-                                <th>Max</th>
-                              </tr>
-                              <tr>
-                                <td>Current</td>
-                                <td>{value?.Sensor1?.Current}</td>
-                                <td>{value?.Sensor3?.Current}</td>
-                              </tr>
-                              <tr>
-                                <td>Power</td>
-                                <td>{value?.Sensor1?.Power}</td>
-                                <td>{value?.Sensor3?.Power}</td>
-                              </tr>
-                              <tr>
-                                <td>Voltage</td>
-                                <td>{value?.Sensor2?.Voltage}</td>
-                                <td>{value?.Sensor3?.Voltage}</td>
-                              </tr>
-                              <tr>
-                                <td>Frequency</td>
-                                <td>{value?.Sensor1?.Frequency}</td>
-                                <td>{value?.Sensor3?.Frequency}</td>
-                              </tr>
-                            </table>
-                          );
-                        }
-                      })}
-                  </div>
-                </div>
-              </div>
-              </div>
+              <div className={style.bigBoxWrapper}>
+                <div className="flexx al  jc">
+                  <div className={style.rectangle}>
+                    <div className={style.innerRect}>
+                      {selectedOption}
 
-              <div className="flexx al  jc">
-                <div className={style.rectangle}>
-                  <div className={style.innerRect}>
-                    {selectedOption}
-                    <ul style={{ display: isListVisible ? "block" : "none" }}>
-                      <li onClick={() => handleOptionSelect("Current")}>
-                        Current
-                      </li>
-                      <li onClick={() => handleOptionSelect("Power")}>Power</li>
-                      <li onClick={() => handleOptionSelect("Frequency")}>
-                        Frequency
-                      </li>
-                    </ul>
-                    <span>
-                      {" "}
-                      <IoIosArrowDropdown onClick={toggleListVisibility} />{" "}
-                    </span>
+                      {/* <ul
+                        style={{
+                          display: isListVisible ? "block" : "none",
+                          
+            
+                        }}
+                      >
+                        <li onClick={() => handleOptionSelect("All")}>
+                          All
+                        </li>
+                        <li onClick={() => handleOptionSelect("Current")}>
+                          Current
+                        </li>
+                        <li onClick={() => handleOptionSelect("Power")}>
+                          Power
+                        </li>
+                        <li onClick={() => handleOptionSelect("Frequency")}>
+                          Frequency
+                        </li>
+                        <li onClick={() => handleOptionSelect("Voltage")}>
+                          Voltage
+                        </li>
+                      </ul> */}
+                       <ul  style={{
+                          display: isListVisible ? "block" : "none",
+                          
+            
+                        }}>
+            <li onClick={() => handleOptionSelect("All")}>All</li>
+            <li onClick={() => handleOptionSelect("Current")}>Current</li>
+            <li onClick={() => handleOptionSelect("Voltage")}>Voltage</li>
+            <li onClick={() => handleOptionSelect("Frequency")}>Frequency</li>
+            <li onClick={() => handleOptionSelect("Power")}>Power</li>
+          </ul>
+                      <span>
+                        {" "}
+                        <IoIosArrowDropdown
+                          onClick={toggleListVisibility}
+                        />{" "}
+                      </span>
+                    </div>
+                  </div>
+                  <div className={style.rectangle}>
+                    <div className={style.innerRect}>
+                      {selectedHistory}
+                      <ul
+                        style={{
+                          display: isListVisible2 ? "block" : "none",
+                        }}
+                      >
+                        <li onClick={() => handleHistorySelect("Last week")}>
+                          Last week
+                        </li>
+                        <li onClick={() => handleHistorySelect("Last month")}>
+                          Last month
+                        </li>
+                        <li onClick={() => handleHistorySelect("Last year")}>
+                          Last year
+                        </li>
+                      </ul>
+                      <span>
+                        <IoIosArrowDropdown onClick={toggleListVisibility2} />
+                      </span>
+                    </div>
                   </div>
                 </div>
-                
-                <FilterComponent
-        selectedHistory={selectedHistory}
-        handleHistorySelect={handleHistorySelect}
-        history={history}
-        toggleHistory={toggleHistory}
-      />
-                  {/* <div className={style.innerRect}>
-                    {selectedHistory}
-                    <ul style={{ display: history ? "block" : "none" }}>
-                      <li onClick={() => handleHistorySelect("Last  7 days ")}>
-                        Last 7 days
-                      </li>
-                      <li onClick={() => handleHistorySelect("Today ")}>
-                        Today
-                      </li>
-                      <li onClick={() => handleHistorySelect("Last month ")}>
-                        Last month
-                      </li>
-                    </ul>
-                    <span>
-                      {" "}
-                      <IoIosArrowDropdown onClick={toggleHistory} />{" "}
-                    </span>
-                  </div> */}
-                
+
+                <div
+                  className={style.bigBox}
+                  style={{
+                    position: "relative",
+                    top: isListVisible ? "24vh" : isListVisible2 ? "15vh" : 0,
+                  }}
+                >
+                  <h3>Min&max values chart</h3>
+                  <CustomLineChart lineChatData={lineChartData} selectedOption={selectedOption}  />
+
+                  <div className={style.innerBigBox}>
+                    <div className={style.vlaues}>
+                      {cities &&
+                        Object.entries(cities).map(([key, value], index) => {
+                          if (index === 0) {
+                            return (
+                              <table style={{ width: "100%" }}>
+                                <tr>
+                                  <th>Values</th>
+                                  <th>Min</th>
+                                  <th>Max</th>
+                                </tr>
+                                <tr>
+                                  <td>Current</td>
+                                  <td>{value?.Sensor1?.Current}</td>
+                                  <td>{value?.Sensor3?.Current}</td>
+                                </tr>
+                                <tr>
+                                  <td>Power</td>
+                                  <td>{value?.Sensor1?.Power}</td>
+                                  <td>{value?.Sensor3?.Power}</td>
+                                </tr>
+                                <tr>
+                                  <td>Voltage</td>
+                                  <td>{value?.Sensor2?.Voltage}</td>
+                                  <td>{value?.Sensor3?.Voltage}</td>
+                                </tr>
+                                <tr>
+                                  <td>Frequency</td>
+                                  <td>{value?.Sensor1?.Frequency}</td>
+                                  <td>{value?.Sensor3?.Frequency}</td>
+                                </tr>
+                              </table>
+                            );
+                          }
+                        })}
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
