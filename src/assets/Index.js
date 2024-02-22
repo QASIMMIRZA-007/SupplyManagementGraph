@@ -1,0 +1,1 @@
+export {default as notFoundImage} from '../assets/notfoundpage.png';

@@ -1,0 +1,34 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+.greenBtn{
+    font-size: 15px;
+        font-family: "Montserrat", sans-serif;
+        padding: 10px 16px;
+        width: 200px;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        transition: all 0.5s ease-in;
+        background-color: green;
+            &:hover{
+                color: green;
+            background: #fff;
+            border: 1px solid green;
+            }
+          }
+
+          
+.whiteBtn{
+    font-size: 15px;
+        font-family: "Montserrat", sans-serif;
+        padding: 10px 16px;
+        width: 200px;
+        border-radius: 20px;
+        border: 1px solid transparent;
+        transition: all 0.5s ease-in;
+        background-color: #fff;
+            &:hover{
+                color: #fff;
+            background: green;
+            border: 1px solid green;
+            }
+          }
+
