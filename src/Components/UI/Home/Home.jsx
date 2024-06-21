@@ -1,9 +1,8 @@
 import { useNavigate } from "react-router";
 import { useUserAuth } from "../../../Context/UserAuthContext";
 
-
 const Home = () => {
-  const { logOut} = useUserAuth();
+  const { logOut } = useUserAuth();
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {

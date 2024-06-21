@@ -12,7 +12,6 @@ import CsvDownload from "react-csv-downloader";
 import CustomBarChart from "./CustomBarChart";
 import CustomLineChart from "./CustomLineChart";
 import FilterComponent from "./FilterComponent";
-import New from "./New";
 
 // genetrating random data with generateRandomData.
 function generateRandomData() {
@@ -111,7 +110,6 @@ function MainLayout() {
 
     // Logic to generate new lineChartData based on the selected history
     let newData = [];
-
     switch (option) {
       case "Last week":
         newData = generateChartDataForDays(7);
@@ -132,7 +130,7 @@ function MainLayout() {
 
   // Function to generate chart data for a given number of days
   const generateChartDataForDays = (numDays) => {
-    const days = ["Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun"];
+    const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
     const today = new Date();
     const newData = Array.from({ length: numDays }, (_, index) => {
       const dayIndex = (today.getDay() + 6 - index) % 7; // Calculate the day index based on today
@@ -162,7 +160,6 @@ function MainLayout() {
   };
 
   // Function to generate chart data for a given number of months
-
   const generateChartDataForMonths = () => {
     const months = [
       "Jan",
@@ -178,6 +175,7 @@ function MainLayout() {
       "Nov",
       "Dec",
     ];
+
     const newData = months.map((month) => ({
       curr: Math.floor(Math.random() * 10000),
       vol: Math.floor(Math.random() * 10000),
@@ -188,27 +186,14 @@ function MainLayout() {
     return newData;
   };
 
-  // const toggleListVisibility = () => {
-  //   setListVisibility(!isListVisible );
-  //   // setListVisibility2(!isListVisible2);
-  // };
-
-  // const toggleHistory = () => {
-  //  setHistory(!history)
-  // };
   const toggleListVisibility = () => {
     setListVisibility(!isListVisible);
-    setListVisibility2(false); // Close the second rectangle when the first one is clicked
+    setListVisibility2(false); // Close the first rectangle when the first one is clicked
   };
   const toggleListVisibility2 = () => {
     setListVisibility2(!isListVisible2);
     setListVisibility(false); // Close the second rectangle when the first one is clicked
   };
-
-  // const toggleHistory = () => {
-  //   setHistory(!history);
-  //   setListVisibility2(false); // Close the second rectangle when the first one is clicked
-  // };
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
@@ -220,7 +205,6 @@ function MainLayout() {
   }, [selectedOption, selectedHistory]);
 
   // Database related code presents here
-
   async function getCities() {
     try {
       const citiesRef = ref(db, "dev1gf");
@@ -254,7 +238,7 @@ function MainLayout() {
       console.error("Error:", error);
     }
   })();
-
+  
   useEffect(() => {
     getCities()
       .then((data) => setCities(data))
@@ -268,21 +252,14 @@ function MainLayout() {
     const temp = {
       Enviornment_Humidity: value?.Enviornment?.Humidity,
       Enviornment_Temperature: value?.Enviornment?.Temperature,
-      // Sensor1_Current:value?.Sensor1?.Current,
       Sensor1_Energy: value?.Sensor1?.Energy,
       Sensor1_Power: value?.Sensor1?.Power,
-      // Sensor1_Frequency:value?.Sensor1?.Frequency,
       Sensor1_PowerFactor: value?.Sensor1?.PowerFactor,
-
-      // Sensor2_Current:value?.Sensor2?.Current,
       Sensor2_Energy: value?.Sensor2?.Energy,
       Sensor2_Power: value?.Sensor2?.Power,
-      // Sensor2_Frequecy:value?.Sensor2?.Frequency,
       Sensor2_PowerFactor: value?.Sensor2?.PowerFactor,
-      // Sensor3_Current:value?.Sensor3?.Current,
       Sensor3_Energy: value?.Sensor3?.Energy,
       Sensor3_Power: value?.Sensor3?.Power,
-      // Sensor3_Frequecy:value?.Sensor3?.Frequency,
       Sensor3_PowerFactor: value?.Sensor3?.PowerFactor,
     };
 
@@ -488,40 +465,25 @@ function MainLayout() {
                     <div className={style.innerRect}>
                       {selectedOption}
 
-                      {/* <ul
+                      <ul
                         style={{
                           display: isListVisible ? "block" : "none",
-                          
-            
                         }}
                       >
-                        <li onClick={() => handleOptionSelect("All")}>
-                          All
-                        </li>
+                        <li onClick={() => handleOptionSelect("All")}>All</li>
                         <li onClick={() => handleOptionSelect("Current")}>
                           Current
-                        </li>
-                        <li onClick={() => handleOptionSelect("Power")}>
-                          Power
-                        </li>
-                        <li onClick={() => handleOptionSelect("Frequency")}>
-                          Frequency
                         </li>
                         <li onClick={() => handleOptionSelect("Voltage")}>
                           Voltage
                         </li>
-                      </ul> */}
-                       <ul  style={{
-                          display: isListVisible ? "block" : "none",
-                          
-            
-                        }}>
-            <li onClick={() => handleOptionSelect("All")}>All</li>
-            <li onClick={() => handleOptionSelect("Current")}>Current</li>
-            <li onClick={() => handleOptionSelect("Voltage")}>Voltage</li>
-            <li onClick={() => handleOptionSelect("Frequency")}>Frequency</li>
-            <li onClick={() => handleOptionSelect("Power")}>Power</li>
-          </ul>
+                        <li onClick={() => handleOptionSelect("Frequency")}>
+                          Frequency
+                        </li>
+                        <li onClick={() => handleOptionSelect("Power")}>
+                          Power
+                        </li>
+                      </ul>
                       <span>
                         {" "}
                         <IoIosArrowDropdown
@@ -563,7 +525,10 @@ function MainLayout() {
                   }}
                 >
                   <h3>Min&max values chart</h3>
-                  <CustomLineChart lineChatData={lineChartData} selectedOption={selectedOption}  />
+                  <CustomLineChart
+                    lineChatData={lineChartData}
+                    selectedOption={selectedOption}
+                  />
 
                   <div className={style.innerBigBox}>
                     <div className={style.vlaues}>
@@ -651,11 +616,3 @@ function MainLayout() {
 }
 
 export default MainLayout;
-
-
-
-
-
-
-
-

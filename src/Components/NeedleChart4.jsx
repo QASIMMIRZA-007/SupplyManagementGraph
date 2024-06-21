@@ -1,9 +1,6 @@
-
-
 import React, { Component } from "react";
 import { render } from "react-dom";
 import GaugeChart from "react-gauge-chart";
-
 export default class App extends Component {
   constructor() {
     super();
@@ -12,7 +9,7 @@ export default class App extends Component {
     };
   }
 
-  render() {
+  render() { 
     return (
       <div>
         <GaugeChart
@@ -22,9 +19,8 @@ export default class App extends Component {
           arcWidth={0.3}
           percent={0.22}
           textColor={"#ff0"}
-        //   hideText={true} // If you want to hide the text
+          //   hideText={true} // If you want to hide the text
         />
-    
       </div>
     );
   }

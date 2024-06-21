@@ -9,8 +9,6 @@
 //   ResponsiveContainer,
 // } from "recharts";
 
-
-
 // const CustomLineChart = ({ lineChatData, selectedOption }) => {
 
 //   const dataKeys = {
@@ -37,7 +35,7 @@
 //             stroke="#8884d8"
 //             activeDot={{ r: 8 }}
 //           />
-//         ))} 
+//         ))}
 //         {/* <Line
 //           type="monotone"
 //           dataKey="pv"
@@ -75,7 +73,6 @@
 
 // export default CustomLineChart;
 
-
 import React from "react";
 import {
   LineChart,
@@ -89,20 +86,20 @@ import {
 
 const CustomLineChart = ({ lineChatData, selectedOption }) => {
   const dataKeys = {
-    "All": ["pv", "curr", "pow", "freq", "vol"],
-    "Current": ["curr"],
-    "Voltage": ["vol"],
-    "Frequency": ["freq"],
-    "Power": ["pow"]
+    All: ["pv", "curr", "pow", "freq", "vol"],
+    Current: ["curr"],
+    Voltage: ["vol"],
+    Frequency: ["freq"],
+    Power: ["pow"],
   };
   const keysToShow = dataKeys[selectedOption] || dataKeys["All"];
 
   const lineColors = {
-    "pv": "#8884d8",
-    "curr": "#ffff00",
-    "pow": "#82c",
-    "freq": "#ffc658",
-    "vol": "#ff7300"
+    pv: "#8884d8",
+    curr: "#ffff00",
+    pow: "#82c",
+    freq: "#ffc658",
+    vol: "#ff7300",
   };
 
   return (
@@ -112,7 +109,7 @@ const CustomLineChart = ({ lineChatData, selectedOption }) => {
         <YAxis hide={true} />
         <Tooltip />
         <Legend />
-        {keysToShow.map(key => (
+        {keysToShow.map((key) => (
           <Line
             key={key}
             type="monotone"
@@ -127,5 +124,3 @@ const CustomLineChart = ({ lineChatData, selectedOption }) => {
 };
 
 export default CustomLineChart;
-
-

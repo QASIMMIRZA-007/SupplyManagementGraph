@@ -33,9 +33,7 @@ const AuthForm = () => {
     setIsSignUp((prevState) => !prevState);
   };
   const db = getDatabase();
-
   const auth = getAuth();
-
   const createUser = async (email, password, username) => {
     try {
       const userCredentials = await createUserWithEmailAndPassword(
@@ -75,14 +73,13 @@ const AuthForm = () => {
       <div className={`authContainer ${isSignUp ? "change" : ""}`}>
         <div className="forms-authContainer">
           <div className="form-control signup-form">
-           
             <form onSubmit={handleSubmit}>
               <h2>Signup</h2>
-              <div className="socials">
+              {/* <div className="socials">
                 <i className="fab fa-facebook-f"></i>
                 <i className="fab fa-google-plus-g"></i>
                 <i className="fab fa-linkedin-in"></i>
-              </div>
+              </div> */}
 
               {/* <hr /> */}
               <input
@@ -116,13 +113,12 @@ const AuthForm = () => {
           </div>
           <div className="form-control signin-form">
             <form onSubmit={handleSubmit}>
-         
               <h2>Login</h2>
-              <div className="socials">
+              {/* <div className="socials">
                 <i className="fab fa-facebook-f"></i>
                 <i className="fab fa-google-plus-g"></i>
                 <i className="fab fa-linkedin-in"></i>
-              </div>
+              </div> */}
 
               {/* <hr /> */}
               <input
@@ -154,7 +150,6 @@ const AuthForm = () => {
               <h2>New Here</h2>
               <p>Sign up and discover a great amount of opportunities!</p>
               <button id="signup-btn" onClick={toggleForm}>
-                {" "}
                 Sign up
               </button>
             </div>

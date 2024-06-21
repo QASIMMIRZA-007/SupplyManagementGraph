@@ -1,5 +1,14 @@
-import React, { PureComponent } from 'react';
-import { BarChart, Bar, Rectangle, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import React, { PureComponent } from "react";
+import {
+  BarChart,
+  Bar,
+  Rectangle,
+  XAxis,
+  YAxis,
+  Tooltip,
+  Legend,
+  ResponsiveContainer,
+} from "recharts";
 
 const data = [
   {
@@ -39,20 +48,31 @@ const data = [
   },
 ];
 
-const CustomBarChart = () => {
- 
-    return (
-      <ResponsiveContainer style={{width:"100%", height:"100%"}}>
-        <BarChart width={50} height={300} data={data}>
-          <XAxis dataKey="name" hide /> {/* Hide XAxis labels */}
-          <YAxis hide /> {/* Hide YAxis labels */}
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="pv" fill="#8884d8" activeBar={<Rectangle fill="pink" stroke="blue" />} />
-          <Bar dataKey="uv" fill="#82ca9d" activeBar={<Rectangle fill="gold" stroke="purple" />} />
-        </BarChart>
-      </ResponsiveContainer>
-    );
-  }
 
-export default CustomBarChart
+
+
+
+const CustomBarChart = () => {
+  return (
+    <ResponsiveContainer style={{ width: "100%", height: "100%" }}>
+      <BarChart width={50} height={300} data={data}>
+        <XAxis dataKey="name" hide /> {/* Hide XAxis labels */}
+        <YAxis hide /> {/* Hide YAxis labels */}
+        <Tooltip />
+        <Legend />
+        <Bar
+          dataKey="pv"
+          fill="#8884d8"
+          activeBar={<Rectangle fill="pink" stroke="blue" />}
+        />
+        <Bar
+          dataKey="uv"
+          fill="#82ca9d"
+          activeBar={<Rectangle fill="gold" stroke="purple" />}
+        />
+      </BarChart>
+    </ResponsiveContainer>
+  );
+};
+
+export default CustomBarChart;
